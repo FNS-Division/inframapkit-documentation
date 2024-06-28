@@ -2,6 +2,8 @@
 
 ## Spe calidi tui quotiens Latio illo ruit
 
+![Cost model inteagration](diagrams/cost-model-integration.drawio.svg)
+
 Lorem markdownum sinus, e cernitis auxilium, nec qua picea hunc. Cernis tu
 imitamine papavera, terras, erat me etiamnum vagos moneo! Est et deus iamdudum
 mandato auctor: tamen Lami surgit opemque metuque. Quasque risus mens
