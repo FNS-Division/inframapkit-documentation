@@ -14,6 +14,7 @@ The full documentation is hosted using the GitHub Pages framework, and built usi
 
 Below is the structure of the repository.
 
+```sh
 inframapkit-documentation
 ├── README.md
 ├── docs
@@ -52,7 +53,8 @@ inframapkit-documentation
     ├── search.html
     ├── sitemap.xml
     └── sitemap.xml.gz
-
+```
+ 
 ## Getting Started
 
 To get started with the `giga-inframapkit` documentation:
@@ -132,7 +134,7 @@ theme: readthedocs
 
 The diagrams are stored in SVG (Scalable Vector Graphics) format, which are editable.
 
-**Top tip**: If you are using the `VS Code` editor, extensions such as [draw.io integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) allow for editing these diagrams from within your code editor.
+**Top tip**: If you are using the VS Code editor, extensions such as [draw.io integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) allow for editing these diagrams from within your code editor.
 
 ### Need Help?
 
