@@ -1,5 +1,10 @@
-site_name: MkLorum
+site_name: giga-inframapkit
 nav:
   - Home: index.md
-  - About: about.md
+  - Proximity: proximity.md
+  - Coverage: coverage.md
+  - Demand: demand.md
+  - Fiber path: fiberpath.md
+  - Visibility: visibility.md
+  - Cost model: costmodel.md
 theme: readthedocs

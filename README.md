@@ -87,7 +87,7 @@ git checkout main
 
 2. Edit your markdown document (with file extension `.md`) containing documentation in `docs/`, and save your changes. For example, rename one of the titles in `doc/about.md`.
 
-3. After editing your mardown document, build the site locally using this command, to preview your changes.
+3. After editing your markdown document, build the site locally using this command, to preview your changes.
 
 ```sh
 mkdocs build
@@ -112,7 +112,7 @@ If you would like to add a new page to the documentation website, for example re
 2. In order for the new page to be indexed in the documentation website, also update the `mkdocs.yml` file.
 
 ```python
-site_name: MkLorum
+site_name: giga-inframapkit
 nav:
   - Home: index.md
   - About: about.md
