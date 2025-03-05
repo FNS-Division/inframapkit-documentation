@@ -26,29 +26,29 @@ The `Visibility` class serves as the foundation for visibility analyses.
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `points_of_interest` | `PointOfInterestCollection` | Required | Collection of points of interest |
-| `cell_sites` | `CellSiteCollection` | None | Collection of cell sites |
-| `srtm_data_handler` | `SRTMDataHandler` | None | Handler for SRTM elevation data |
-| `search_radius` | `int` | 35 | Maximum distance (km) to search for visibility |
-| `num_visible` | `int` | 3 | Number of visible sites/POIs to find |
-| `poi_antenna_height` | `float` | 15 | Antenna height at POI locations (meters) |
-| `allowed_radio_types` | `list` | ['unknown', '2G', '3G', '4G', '5G'] | Radio types to include |
-| `earth_radius` | `float` | 6371 | Earth radius in kilometers |
-| `refraction_coef` | `float` | 0 | Atmospheric refraction coefficient |
-| `use_srtm` | bool | `True` | Whether to use SRTM elevation data |
-| `logger` | Logger | `None` | Logger instance |
+| points_of_interest | `PointOfInterestCollection` | Required | Collection of points of interest |
+| cell_sites | `CellSiteCollection` | None | Collection of cell sites |
+| srtm_data_handler | `SRTMDataHandler` | None | Handler for SRTM elevation data |
+| search_radius | `int` | 35 | Maximum distance (km) to search for visibility |
+| num_visible | `int` | 3 | Number of visible sites/POIs to find |
+| poi_antenna_height | `float` | 15 | Antenna height at POI locations (meters) |
+| allowed_radio_types | `list` | ['unknown', '2G', '3G', '4G', '5G'] | Radio types to include |
+| earth_radius | `float` | 6371 | Earth radius in kilometers |
+| refraction_coef | `float` | 0 | Atmospheric refraction coefficient |
+| use_srtm | bool | `True` | Whether to use SRTM elevation data |
+| logger | Logger | `None` | Logger instance |
 
 ## Class Attributes
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| `points_of_interest` | `PointOfInterestCollection` | Collection of points of interest |
-| `cell_sites` | `CellSiteCollection` | Collection of cell sites |
-| `srtm_data_handler` | `SRTMDataHandler` | Handler for SRTM elevation data |
-| `search_radius` | `int` | Maximum search distance in meters |
-| `analysis_param` | `dict` | Parameters used for the analysis |
-| `analysis_stats` | `dict` | Statistics about the analysis run |
-| `logger` | `Logger` | Logger instance for the class |
+| points_of_interest | `PointOfInterestCollection` | Collection of points of interest |
+| cell_sites | `CellSiteCollection` | Collection of cell sites |
+| srtm_data_handler | `SRTMDataHandler` | Handler for SRTM elevation data |
+| search_radius | `int` | Maximum search distance in meters |
+| analysis_param | `dict` | Parameters used for the analysis |
+| analysis_stats | `dict` | Statistics about the analysis run |
+| logger | `Logger` | Logger instance for the class |
 
 ## Methods
 
@@ -64,9 +64,9 @@ The `Visibility` class serves as the foundation for visibility analyses.
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| `analysis_results` | `dict` | Dictionary storing analysis results per POI |
-| `analysis_stats` | `dict` | Statistics about the analysis run |
-| `analysis_param` | `dict` | Parameters used for the analysis |
+| analysis_results | `dict` | Dictionary storing analysis results per POI |
+| analysis_stats | `dict` | Statistics about the analysis run |
+| analysis_param | `dict` | Parameters used for the analysis |
 
 ## Methods
 
@@ -85,7 +85,7 @@ The `Visibility` class serves as the foundation for visibility analyses.
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| `analysis_results` |`DataFrame` | DataFrame storing source-target pairs with visibility status |
+| analysis_results |`DataFrame` | DataFrame storing source-target pairs with visibility status |
 
 ## Methods
 
