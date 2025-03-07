@@ -54,9 +54,9 @@ The `Visibility` class serves as the foundation for visibility analyses.
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `retrieve_srtm_data_files()` | `None` | Downloads required SRTM elevation data |
-| `get_antenna_height(point)` | `float` | Gets antenna height for a point |
-| `check_visibility(source, target, use_srtm, srtm_collection, search_radius)` | `tuple` | Determines if target is visible from source considering terrain |
+| retrieve_srtm_data_files() | `None` | Downloads required SRTM elevation data |
+| get_antenna_height(point) | `float` | Gets antenna height for a point |
+| check_visibility(source, target, use_srtm, srtm_collection, search_radius) | `tuple` | Determines if target is visible from source considering terrain |
 
 # VisibilityCell: Cell Sites Visible from POIs
 
@@ -72,12 +72,12 @@ The `Visibility` class serves as the foundation for visibility analyses.
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `perform_analysis()` | `None` | Executes visibility analysis, finding visible cell sites for each POI |
-| `get_results_table()` | `DataFrame` | Returns formatted results with detailed visibility information |
-| `get_storage_table()` | `DataFrame` | Returns raw analysis results as a DataFrame |
-| `format_analysis_summary()` | `str` | Returns a human-readable summary of analysis statistics |
-| `retrieve_srtm_data_files()` | `None` | Downloads required SRTM elevation data |
-| `check_visibility()` | `tuple` | Determines if target is visible from source considering terrain |
+| perform_analysis() | `None` | Executes visibility analysis, finding visible cell sites for each POI |
+| get_results_table() | `DataFrame` | Returns formatted results with detailed visibility information |
+| get_storage_table() | `DataFrame` | Returns raw analysis results as a DataFrame |
+| format_analysis_summary() | `str` | Returns a human-readable summary of analysis statistics |
+| retrieve_srtm_data_files() | `None` | Downloads required SRTM elevation data |
+| check_visibility() | `tuple` | Determines if target is visible from source considering terrain |
 
 # VisibilityPOI: Points of Interest Visible to Each Other
 
@@ -91,10 +91,10 @@ The `Visibility` class serves as the foundation for visibility analyses.
 
 | Method | Return Type | Description |
 |--------|-------------|-------------|
-| `perform_analysis()` | `None` | Computes visibility between all pairs of POIs |
-| `get_results_table()` | `DataFrame` | Returns a symmetrically formatted visibility graph |
-| `retrieve_srtm_data_files()` | `None` | Downloads required SRTM elevation data |
-| `check_visibility()` | `tuple` | Determines if target is visible from source considering terrain |
+| perform_analysis() | `None` | Computes visibility between all pairs of POIs |
+| get_results_table() | `DataFrame` | Returns a symmetrically formatted visibility graph |
+| retrieve_srtm_data_files() | `None` | Downloads required SRTM elevation data |
+| check_visibility() | `tuple` | Determines if target is visible from source considering terrain |
 
 # Example
 

@@ -57,6 +57,7 @@ _Figure. Population counts around Points of Interest using non-overlapping buffe
 import pandas as pd
 from giga_inframapkit.entities.pointofinterest import PointOfInterestCollection
 from giga_inframapkit.handlers.populationdatahandler import PopulationDataHandler
+from giga_inframapkit.mapping.demand import Demand
 
 # 1. Set up your data collections
 

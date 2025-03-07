@@ -56,6 +56,7 @@ import pandas as pd
 import geopandas as gpd
 from giga_inframapkit.entities.pointofinterest import PointOfInterestCollection
 from giga_inframapkit.entities.cellsite import CellSiteCollection
+from giga_inframapkit.mapping.coverage import Coverage
 
 # 1. Set up your data collections
 
