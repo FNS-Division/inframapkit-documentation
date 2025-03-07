@@ -1,6 +1,7 @@
 site_name: giga-inframapkit
 nav:
   - Home: index.md
+  - Input data: inputdata.md
   - Proximity: proximity.md
   - Coverage: coverage.md
   - Demand: demand.md

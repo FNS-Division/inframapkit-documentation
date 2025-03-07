@@ -132,17 +132,77 @@ The `value` column contains the actual numerical results for each combination of
 
 ### Fiber
 
+_Table. Fiber cost model parameters._
+
+| Technology | Parameter | Variable name | Value | Measurement unit |
+|------------|-----------|---------------|-------|------------------|
+| fiber | On-premises hardware setup cost​ (materials, equipment, labor) | hw_setup_cost_fiber | 500 | USD per school​ |
+| fiber | Fiber optical cable line​ construction cost (materials, equipment, labor) | focl_constr_cost_fiber | 8000 | USD per km​ |
+| fiber | Hardware refresh after | reinv_period_fiber | 5 | Years |
+| fiber | Annual hardware maintenance and replacement costs​ | an_hw_maint_and_repl_fiber | 0.1 | USD per year​ (as a fraction of hardware CapEx​) |
+| fiber | Annual transit bandwidth cost for 1 Mbps of dedicated internet access channel over a fiber optic cable line | an_traffic_fees_one_mbps_fiber | 12 | USD per Mbps per year |
+| fiber | Annual access bandwidth cost for 1 Mbps of dedicated internet access channel over a fiber optic cable line | an_isp_fees_one_mbps_fiber | 31.8 | USD per Mbps per year |
+
+_Figure. Fiber cost model._
+
 ![fiber-cost-model](diagrams/fiber-cost-model.drawio.svg)
 
 ### Cellular
+
+_Table. Cellular cost model parameters._
+
+| Technology | Parameter | Variable name | Value | Measurement unit |
+|------------|-----------|---------------|-------|------------------|
+| p2area | On-premises hardware setup cost​ (materials, equipment, labor) | hw_setup_cost_p2area | 80 | USD per school​ |
+| p2area | Reinvest into hardware after | reinv_period_p2area | 3 | Years |
+| p2area | Annual hardware maintenance and replacement costs​ | an_hw_maint_and_repl_p2area | 0.1 | USD per year​ (as a fraction of hardware CapEx​) |
+| p2area | Annual Traffic fee for 1 Mbps of dedicated internet access channel over cellular network | an_traffic_fees_one_mbps_p2area | 12 | USD per Mbps per year |
+| p2area | Annual ISP fee for 1 Mbps of dedicated internet access channel over cellular network | an_isp_fees_one_mbps_p2area | 24 | USD per Mbps per year |
+| p2area | Time required to install cellular infrastructure | invest_time_p2area | 0 | Years |
+
+_Figure. Cellular cost model._
 
 ![cellular-cost-model](diagrams/cellular-cost-model.drawio.svg)
 
 ### Point-to-point microwave
 
+_Table. Point-to-point microwave cost model parameters._
+
+| Technology | Parameter | Variable name | Value | Measurement unit |
+|------------|-----------|---------------|-------|------------------|
+| p2p | On-premises hardware setup cost​ (materials, equipment, labor) | hw_setup_cost_p2p | 500 | USD per school​ |
+| p2p | Microwave point-to-point access link installation and comissioning cost (materials, equipment, labor) | access_link_setup_p2p | 831.59 | USD per hop​ |
+| p2p | Number of microwave point-to-point backhaul links | backhaul_link_num_p2p | 0 | Links |
+| p2p | Microwave point-to-point backhaul link installation and comissioning cost (materials, equipment, labor) | backhaul_link_setup_p2p | 2825.07 | USD per hop​ |
+| p2p | Number of retransmission telecommunication towers | retr_tower_num_p2p | 0 | Towers |
+| p2p | Retransmission telecommunication tower installation cost | retr_tower_inst_p2p | 13000 | USD per tower |
+| p2p | Bandwidth per access link | access_link_bandwidth_p2p | 10 | MHz |
+| p2p | Bandwidth per backhaul link | backhaul_link_bandwidth_p2p | 20 | MHz |
+| p2p | One time license fee for 1MHz | one_time_license_fee_1mhz_p2p | 500 | USD per MHz |
+| p2p | Reinvest into hardware after | reinv_period_p2p | 5 | Years |
+| p2p | Annual hardware maintenance and replacement costs​ | an_hw_maint_and_repl_p2p | 0.004 | USD per year​ (as a fraction of hardware CapEx​) |
+| p2p | Annual recurring license fee for 1MHz | an_license_fee_1mhz_p2p | 100 | USD per MHz per year |
+| p2p | Annual Traffic fee for 1 Mbps of dedicated internet access channel over a P2P microwave link | an_traffic_fees_one_mbps_p2p | 12 | USD per Mbps per year |
+| p2p | Annual ISP fee for 1 Mbps of dedicated internet access channel over a P2P microwave link | an_isp_fees_one_mbps_p2p | 24 | USD per Mbps per year |
+| p2p | Time required to install P2P infrastructure | invest_time_p2p | 0 | Years |
+
+_Figure. Point-to-point microwave cost model._
+
 ![p2p-cost-model](diagrams/p2p-cost-model.drawio.svg)
 
 ### Satellite
+
+_Table. Satellite cost model parameters._
+
+| Technology | Parameter | Variable name | Value | Measurement unit |
+|------------|-----------|---------------|-------|------------------|
+| satellite | On-premises hardware setup cost​ (materials, equipment, labor) | hw_setup_cost_sat | 3000 | USD per school​ |
+| satellite | Reinvest into hardware after | reinv_period_sat | 5 | Years |
+| satellite | Annual hardware maintenance and replacement costs​ | an_hw_maint_and_repl_sat | 0.04 | USD per year​ (as a fraction of hardware CapEx​) |
+| satellite | Annual Traffic fee for 1 Mbps of dedicated internet access channel over satellite channel | an_traffic_fees_one_mbps_sat | 12 | USD per Mbps per year |
+| satellite | Annual ISP fee for 1 Mbps of dedicated internet access channel over satellite channel | an_isp_fees_one_mbps_sat | 24 | USD per Mbps per year |
+
+_Figure. Satellite cost model._
 
 ![satellite-cost-model](diagrams/satellite-cost-model.drawio.svg)
 
