@@ -44,6 +44,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../inputdata/">Input data</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../proximity/">Proximity</a>
                 </li>
               </ul>
@@ -53,6 +57,24 @@
               </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Demand</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-parameters">Class Parameters</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#required">Required</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#optional">Optional</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-attributes">Class Attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#methods">Methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example">Example</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -65,10 +87,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../costmodel/">Cost model</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../giga/">GIGA</a>
                 </li>
               </ul>
       </div>
@@ -94,7 +112,123 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="demand">Demand</h1>
+<h2 id="overview">Overview</h2>
+<p>The Demand class analyzes population density and bandwidth requirements around points of interest (POIs). It calculates population counts within specified radii and estimates network traffic demand based on general population density.</p>
+<p><em>Figure. Population counts around Points of Interest using non-overlapping buffers.</em></p>
+<p><img alt="demand" src="../img/voronoi_demand.jpg" /></p>
+<p><strong>Key features:</strong></p>
+<ul>
+<li>Calculates population distribution within customizable radii around POIs</li>
+<li>Estimates bandwidth requirements based on population and per-user demand</li>
+<li>Supports non-overlapping catchment areas using Voronoi diagrams</li>
+</ul>
+<h2 id="class-parameters">Class Parameters</h2>
+<h3 id="required">Required</h3>
+<ul>
+<li><strong>points_of_interest</strong> (<code>PointOfInterestCollection</code>): Collection of points of interest for analysis.</li>
+<li><strong>population_data_handler</strong> (<code>PopulationDataHandler</code>): Handler for accessing population data.</li>
+</ul>
+<h2 id="optional">Optional</h2>
+<ul>
+<li><strong>radii</strong> (<code>list</code>, default=[1, 3, 5]): List of radii in kilometers for population analysis.</li>
+<li><strong>radius_for_demand</strong> (<code>int</code>, default=1): Specific radius used for traffic demand calculations.</li>
+<li><strong>mbps_demand_per_user</strong> (<code>int</code>, default=5): Bandwidth demand per user in Mbps.</li>
+<li><strong>overlap_allowed</strong> (<code>bool</code>, default=False): Whether to allow POI catchment areas to overlap.</li>
+<li><strong>logger</strong> (<code>logging.Logger</code>, optional): Logger instance. Default created if None.</li>
+</ul>
+<h2 id="class-attributes">Class Attributes</h2>
+<ul>
+<li><strong>points_of_interest</strong>: Collection of points of interest</li>
+<li><strong>population_data_handler</strong>: Handler for population data</li>
+<li><strong>population_data</strong>: Population dataset from the handler</li>
+<li><strong>radii</strong>: List of radii for analysis</li>
+<li><strong>radius_for_demand</strong>: Radius used for traffic calculations</li>
+<li><strong>mbps_demand_per_user</strong>: Bandwidth demand per user</li>
+<li><strong>overlap_allowed</strong>: Boolean flag for catchment area overlap</li>
+<li><strong>analysis_param</strong>: Dictionary of analysis parameters</li>
+<li><strong>analysis_stats</strong>: Dictionary of analysis statistics</li>
+<li><strong>analysis_results</strong>: Dictionary of raw analysis results</li>
+<li><strong>traffic_demand</strong>: DataFrame of bandwidth requirements per POI</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li><strong>perform_analysis()</strong>: Executes demand analysis based on population distribution around POIs.</li>
+<li><strong>get_neighbor_population_pixels()</strong>: Retrieves population data for neighboring pixels around POIs.</li>
+<li><strong>get_results_table()</strong>: Returns formatted results including traffic demand estimates.</li>
+<li><strong>get_storage_table()</strong>: Returns raw analysis data.</li>
+<li><strong>format_analysis_summary()</strong>: Returns a human-readable summary of analysis statistics.</li>
+</ul>
+<h2 id="example">Example</h2>
+<pre><code class="language-python">import pandas as pd
+from giga_inframapkit.entities.pointofinterest import PointOfInterestCollection
+from giga_inframapkit.handlers.populationdatahandler import PopulationDataHandler
+from giga_inframapkit.mapping.demand import Demand
+
+# 1. Set up your data collections
+
+poi_df = pd.read_csv(&quot;input/points_of_interest.csv&quot;)
+poi_collection = PointOfInterestCollection()
+poi_collection.load_from_records(poi_df.to_dict('records'))
+
+# PointOfInterestCollection: 100 entities
+
+# 2. Set up the population data handler, that downloads a raster file with population data into the data_dir - It has a method called population_data, that loads a GeoDataFrame with the values per pixel
+
+pop_handler = PopulationDataHandler(
+    data_dir=&quot;input/population_data&quot;,
+    country_code=&quot;ESP&quot;,
+    dataset_year=2020,
+    one_km_res=True,
+    un_adjusted=True
+)
+
+# 3. Create a Demand analysis instance
+
+demand = Demand(
+    points_of_interest = poi_collection,
+    population_data_handler = pop_handler,
+    radii = [1, 2, 3],
+    logger = None,
+    overlap_allowed = False,
+    mbps_demand_per_user = 5)
+
+# 3. Run the analysis
+
+demand.perform_analysis()
+
+# Demand Analysis Summary:
+# Number of points of interest: 100
+# Country population count: 46754784.0
+# Mean population count of 1km area around a point of interest: 968.88
+# Median population count of 1km area around a point of interest: 231.0
+# Sum population count of 1km area around a point of interest: 96888
+# Mean point of interest count of 1km area around a point of interest: 1.54
+# Median point of interest count of 1km area around a point of interest: 1.0
+# Sum point of interest count of 1km area around a point of interest: 154
+# Mean population count of 2km area around a point of interest: 3164.57
+# Median population count of 2km area around a point of interest: 1294.0
+# Sum population count of 2km area around a point of interest: 316457
+# Mean point of interest count of 2km area around a point of interest: 2.98
+# Median point of interest count of 2km area around a point of interest: 3.0
+# Sum point of interest count of 2km area around a point of interest: 298
+# Mean population count of 3km area around a point of interest: 6401.05
+# Median population count of 3km area around a point of interest: 3368.0
+# Sum population count of 3km area around a point of interest: 640105
+# Mean point of interest count of 3km area around a point of interest: 5.2
+# Median point of interest count of 3km area around a point of interest: 5.0
+# Sum point of interest count of 3km area around a point of interest: 520
+# Time taken for analysis: 0.7 seconds
+
+demand.get_results_table()
+
+#   poi_id  population  poi_count   number_of_users total_mbps
+# 0 23dd6a45-3656-435b-b3b1-c16efab9daeb    {'population_1km': 377, 'population_2km': 2850...   {'poi_count_1km': 1, 'poi_count_2km': 4, 'poi_...   377 1885
+# 1 e13a657c-edf0-4013-92db-6c70136e3ac9    {'population_1km': 64, 'population_2km': 457, ...   {'poi_count_1km': 2, 'poi_count_2km': 6, 'poi_...   64  320
+# 2 de75c87b-2676-47be-8454-4c44c4e6f644    {'population_1km': 132, 'population_2km': 662,...   {'poi_count_1km': 2, 'poi_count_2km': 3, 'poi_...   132 660
+# 3 4267fc81-0e9f-40ca-84c8-84529958dc22    {'population_1km': 233, 'population_2km': 3626...   {'poi_count_1km': 1, 'poi_count_2km': 3, 'poi_...   233 1165
+# 4 ae0ccc6e-5f91-4a58-a60b-68e8ebcdc797    {'population_1km': 737, 'population_2km': 4656...   {'poi_count_1km': 2, 'poi_count_2km': 7, 'poi_...   737 3685
+</code></pre>
               
             </div>
           </div><footer>

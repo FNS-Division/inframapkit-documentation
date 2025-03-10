@@ -43,8 +43,30 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../inputdata/">Input data</a>
+                </li>
+              </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Proximity</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-parameters">Class parameters</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#required">Required</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional">Optional</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-attributes">Class attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#methods">Methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example">Example</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -65,10 +87,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../costmodel/">Cost model</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../giga/">GIGA</a>
                 </li>
               </ul>
       </div>
@@ -94,12 +112,123 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="proximity">Proximity</h1>
+<h2 id="overview">Overview</h2>
+<p>The Proximity class calculates distances between points of interest (POIs) and telecommunications infrastructure elements. It performs spatial analysis to find the nearest cell sites and transmission nodes for each POI.</p>
+<p><strong>Key features:</strong></p>
+<ul>
+<li>Calculates distances to the nearest infrastructure elements by type (2G/3G/4G/5G cell sites, fiber nodes)</li>
+<li>Uses Haversine formula to account for Earth's curvature in distance calculations</li>
+<li>Efficiently processes large datasets using k-d trees for nearest-neighbor searches</li>
+<li>Provides both raw distance data and summary statistics</li>
+</ul>
+<h2 id="class-parameters">Class parameters</h2>
+<h3 id="required">Required</h3>
+<ul>
+<li><strong>points_of_interest</strong> (<code>PointOfInterestCollection</code>): Collection of points of interest for which proximity will be calculated.</li>
+<li><strong>cell_sites</strong> (<code>CellSiteCollection</code>): Collection of cell site locations with attributes including radio type (2G, 3G, 4G, 5G).</li>
+<li><strong>transmission_nodes</strong> (<code>TransmissionNodeCollection</code>): Collection of transmission infrastructure nodes with attributes including transmission medium type.</li>
+</ul>
+<h3 id="optional">Optional</h3>
+<ul>
+<li><strong>logger</strong> (<code>logging.Logger</code>, optional):
+Logger instance for capturing messages. If None, a default logger will be created.</li>
+</ul>
+<h2 id="class-attributes">Class attributes</h2>
+<ul>
+<li><strong>points_of_interest</strong>: Original collection of POIs</li>
+<li><strong>cell_sites</strong>: Original collection of all cell sites</li>
+<li><strong>transmission_nodes</strong>: Original collection of all transmission nodes</li>
+<li><strong>cell_sites_2g/3g/4g/5g</strong>: Filtered collections by radio type</li>
+<li><strong>transmission_nodes_fiber</strong>: Filtered collection of fiber-based transmission nodes</li>
+<li><strong>analysis_param</strong>: Dictionary for storing configuration parameters</li>
+<li><strong>analysis_stats</strong>: Dictionary storing statistics (counts of elements, mean distances)</li>
+<li><strong>analysis_results</strong>: Dictionary storing raw results (distances from each POI to infrastructure)</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li><strong>perform_analysis()</strong>: Executes the proximity analysis for all POIs and infrastructure elements.</li>
+<li><strong>get_results_table()</strong>: Returns a formatted DataFrame with the analysis results in a structured format.</li>
+<li><strong>get_storage_table()</strong>: Returns a DataFrame with the raw analysis results.</li>
+<li><strong>format_analysis_summary()</strong>: Formats the analysis statistics as a human-readable string summary.</li>
+</ul>
+<h2 id="example">Example</h2>
+<pre><code class="language-python">import pandas as pd
+from giga_inframapkit.entities.pointofinterest import PointOfInterestCollection
+from giga_inframapkit.entities.cellsite import CellSiteCollection
+from giga_inframapkit.entities.transmissionnode import TransmissionNodeCollection
+from giga_inframapkit.proximity import Proximity
+
+# 1. Set up your data collections
+
+dataset_ids = {
+    'pointofinterest': 'points_of_interest.csv',
+    'cellsite': 'cell_sites.csv',
+    'transmissionnode': 'transmission_nodes.csv'
+}
+
+data_collections = {
+    'pointofinterest': PointOfInterestCollection(),
+    'cellsite': CellSiteCollection(),
+    'transmissionnode': TransmissionNodeCollection()
+}
+
+for data_category, filepath in dataset_ids.items():
+    df = pd.read_csv(f&quot;input/{filepath}&quot;).to_dict('records')
+    data_collections[data_category].load_from_records(records)
+
+# PointOfInterestCollection: 100 entities
+# CellSiteCollection: 100 entities
+# TransmissionNodeCollection: 30 entities
+
+# 2. Create a Proximity analysis instance
+
+proximity = Proximity(
+    points_of_interest=poi_collection,
+    cell_sites=cell_sites,
+    transmission_nodes=transmission_nodes
+)
+
+
+# 3. Run the analysis
+
+proximity.perform_analysis()
+
+# Proximity Analysis Summary:
+# Number of points of interest: 100
+# Number of cell sites: 100
+# Number of transmission nodes: 30
+# Number of 2G cell sites: 6
+# Number of 3G cell sites: 30
+# Number of 4G cell sites: 64
+# Number of 5G cell sites: 0
+# Number of fiber nodes: 30
+# Mean cell site distance: 1267.17
+# Mean transmission node distance: 2451.69
+# Mean 2G cell site distance: 5647.04
+# Mean 3G cell site distance: 2419.78
+# Mean 4G cell site distance: 1606.58
+# Mean fiber node distance: 2451.69
+# Time taken for analysis: 0.0 seconds
+
+# 4. Inspect output
+
+p_results = proximity.get_results_table()
+p_results.head()
+
+#   poi_id  cell_site_dist  transmission_node_dist
+# 0 23dd6a45-3656-435b-b3b1-c16efab9daeb    {'any': 1158, '2G': 2365, '3G': 2475, '4G': 11...   {'any': 2559, 'fiber': 2559}
+# 1 e13a657c-edf0-4013-92db-6c70136e3ac9    {'any': 2817, '2G': 10258, '3G': 3967, '4G': 2...   {'any': 1808, 'fiber': 1808}
+# 2 de75c87b-2676-47be-8454-4c44c4e6f644    {'any': 646, '2G': 4049, '3G': 1086, '4G': 646...   {'any': 3183, 'fiber': 3183}
+# 3 4267fc81-0e9f-40ca-84c8-84529958dc22    {'any': 1066, '2G': 1066, '3G': 2863, '4G': 13...   {'any': 1678, 'fiber': 1678}
+# 4 ae0ccc6e-5f91-4a58-a60b-68e8ebcdc797    {'any': 462, '2G': 7196, '3G': 2288, '4G': 462...   {'any': 1615, 'fiber': 1615}
+
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../inputdata/" class="btn btn-neutral float-left" title="Input data"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../coverage/" class="btn btn-neutral float-right" title="Coverage">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -123,7 +252,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../inputdata/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../coverage/" style="color: #fcfcfc">Next &raquo;</a></span>

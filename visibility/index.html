@@ -44,6 +44,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../inputdata/">Input data</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../proximity/">Proximity</a>
                 </li>
               </ul>
@@ -61,14 +65,12 @@
               </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Visibility</a>
+    <ul class="current">
+    </ul>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../costmodel/">Cost model</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../giga/">GIGA</a>
                 </li>
               </ul>
       </div>
@@ -94,7 +96,413 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="visibility">Visibility</h1>
+<p>The Visibility module provides tools to analyze line-of-sight connectivity between different infrastructure components. It determines whether points of interest (POIs) have clear line-of-sight with cell sites or with other POIs, accounting for terrain elevation, Earth's curvature, and antenna heights. Line-of-sight is required to establish the feasibility of radio links between points of interest (POIs) and cell sites using visibility analysis. The analysis uses open topography data from the <a href="https://www.earthdata.nasa.gov/data/instruments/srtm">Shuttle Radar Topography Mission</a> (SRTM), which provides 30-meter resolution elevation data.</p>
+<p><em>Figure: Visible cell site</em></p>
+<p><img alt="visible-cell-site" src="../img/visible-cell-site.png" /></p>
+<p><em>Figure: Obstructed cell site</em></p>
+<p><img alt="not-visible-cell-site" src="../img/not-visible-cell-site.png" /></p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Line-of-sight analysis between points considering terrain elevation (SRTM data)</li>
+<li>Earth curvature and atmospheric refraction modeling</li>
+<li>Configurable search radius and antenna heights</li>
+<li>Support for different cellular radio types (2G, 3G, 4G, 5G)</li>
+<li>Detailed results including visibility status, distances, and azimuth angles</li>
+</ul>
+<h1 id="base-class-visibility">Base Class: Visibility</h1>
+<p>The <code>Visibility</code> class serves as the foundation for visibility analyses.</p>
+<h2 id="class-parameters">Class Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>points_of_interest</td>
+<td><code>PointOfInterestCollection</code></td>
+<td>Required</td>
+<td>Collection of points of interest</td>
+</tr>
+<tr>
+<td>cell_sites</td>
+<td><code>CellSiteCollection</code></td>
+<td>None</td>
+<td>Collection of cell sites</td>
+</tr>
+<tr>
+<td>srtm_data_handler</td>
+<td><code>SRTMDataHandler</code></td>
+<td>None</td>
+<td>Handler for SRTM elevation data</td>
+</tr>
+<tr>
+<td>search_radius</td>
+<td><code>int</code></td>
+<td>35</td>
+<td>Maximum distance (km) to search for visibility</td>
+</tr>
+<tr>
+<td>num_visible</td>
+<td><code>int</code></td>
+<td>3</td>
+<td>Number of visible sites/POIs to find</td>
+</tr>
+<tr>
+<td>poi_antenna_height</td>
+<td><code>float</code></td>
+<td>15</td>
+<td>Antenna height at POI locations (meters)</td>
+</tr>
+<tr>
+<td>allowed_radio_types</td>
+<td><code>list</code></td>
+<td>['unknown', '2G', '3G', '4G', '5G']</td>
+<td>Radio types to include</td>
+</tr>
+<tr>
+<td>earth_radius</td>
+<td><code>float</code></td>
+<td>6371</td>
+<td>Earth radius in kilometers</td>
+</tr>
+<tr>
+<td>refraction_coef</td>
+<td><code>float</code></td>
+<td>0</td>
+<td>Atmospheric refraction coefficient</td>
+</tr>
+<tr>
+<td>use_srtm</td>
+<td>bool</td>
+<td><code>True</code></td>
+<td>Whether to use SRTM elevation data</td>
+</tr>
+<tr>
+<td>logger</td>
+<td>Logger</td>
+<td><code>None</code></td>
+<td>Logger instance</td>
+</tr>
+</tbody>
+</table>
+<h2 id="class-attributes">Class Attributes</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>points_of_interest</td>
+<td><code>PointOfInterestCollection</code></td>
+<td>Collection of points of interest</td>
+</tr>
+<tr>
+<td>cell_sites</td>
+<td><code>CellSiteCollection</code></td>
+<td>Collection of cell sites</td>
+</tr>
+<tr>
+<td>srtm_data_handler</td>
+<td><code>SRTMDataHandler</code></td>
+<td>Handler for SRTM elevation data</td>
+</tr>
+<tr>
+<td>search_radius</td>
+<td><code>int</code></td>
+<td>Maximum search distance in meters</td>
+</tr>
+<tr>
+<td>analysis_param</td>
+<td><code>dict</code></td>
+<td>Parameters used for the analysis</td>
+</tr>
+<tr>
+<td>analysis_stats</td>
+<td><code>dict</code></td>
+<td>Statistics about the analysis run</td>
+</tr>
+<tr>
+<td>logger</td>
+<td><code>Logger</code></td>
+<td>Logger instance for the class</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>retrieve_srtm_data_files()</td>
+<td><code>None</code></td>
+<td>Downloads required SRTM elevation data</td>
+</tr>
+<tr>
+<td>get_antenna_height(point)</td>
+<td><code>float</code></td>
+<td>Gets antenna height for a point</td>
+</tr>
+<tr>
+<td>check_visibility(source, target, use_srtm, srtm_collection, search_radius)</td>
+<td><code>tuple</code></td>
+<td>Determines if target is visible from source considering terrain</td>
+</tr>
+</tbody>
+</table>
+<h1 id="visibilitycell-cell-sites-visible-from-pois">VisibilityCell: Cell Sites Visible from POIs</h1>
+<h2 id="class-attributes_1">Class Attributes</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>analysis_results</td>
+<td><code>dict</code></td>
+<td>Dictionary storing analysis results per POI</td>
+</tr>
+<tr>
+<td>analysis_stats</td>
+<td><code>dict</code></td>
+<td>Statistics about the analysis run</td>
+</tr>
+<tr>
+<td>analysis_param</td>
+<td><code>dict</code></td>
+<td>Parameters used for the analysis</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods_1">Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>perform_analysis()</td>
+<td><code>None</code></td>
+<td>Executes visibility analysis, finding visible cell sites for each POI</td>
+</tr>
+<tr>
+<td>get_results_table()</td>
+<td><code>DataFrame</code></td>
+<td>Returns formatted results with detailed visibility information</td>
+</tr>
+<tr>
+<td>get_storage_table()</td>
+<td><code>DataFrame</code></td>
+<td>Returns raw analysis results as a DataFrame</td>
+</tr>
+<tr>
+<td>format_analysis_summary()</td>
+<td><code>str</code></td>
+<td>Returns a human-readable summary of analysis statistics</td>
+</tr>
+<tr>
+<td>retrieve_srtm_data_files()</td>
+<td><code>None</code></td>
+<td>Downloads required SRTM elevation data</td>
+</tr>
+<tr>
+<td>check_visibility()</td>
+<td><code>tuple</code></td>
+<td>Determines if target is visible from source considering terrain</td>
+</tr>
+</tbody>
+</table>
+<h1 id="visibilitypoi-points-of-interest-visible-to-each-other">VisibilityPOI: Points of Interest Visible to Each Other</h1>
+<h2 id="class-attributes_2">Class Attributes</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>analysis_results</td>
+<td><code>DataFrame</code></td>
+<td>DataFrame storing source-target pairs with visibility status</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods_2">Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>perform_analysis()</td>
+<td><code>None</code></td>
+<td>Computes visibility between all pairs of POIs</td>
+</tr>
+<tr>
+<td>get_results_table()</td>
+<td><code>DataFrame</code></td>
+<td>Returns a symmetrically formatted visibility graph</td>
+</tr>
+<tr>
+<td>retrieve_srtm_data_files()</td>
+<td><code>None</code></td>
+<td>Downloads required SRTM elevation data</td>
+</tr>
+<tr>
+<td>check_visibility()</td>
+<td><code>tuple</code></td>
+<td>Determines if target is visible from source considering terrain</td>
+</tr>
+</tbody>
+</table>
+<h1 id="example">Example</h1>
+<pre><code class="language-python">import pandas as pd
+from giga_inframapkit.entities.pointofinterest import PointOfInterestCollection
+from giga_inframapkit.entities.cellsite import CellSiteCollection
+from giga_inframapkit.handlers.srtmdatahandler import SRTMDataHandler
+from giga_inframapkit.visibility.visibility import VisibilityCell, VisibilityPOI
+
+# 1. Set up your data collections
+
+poi_df = pd.read_csv(&quot;input/points_of_interest.csv&quot;) 
+poi_collection = PointOfInterestCollection() 
+poi_collection.load_from_records(poi_df.to_dict('records'))
+
+# PointOfInterestCollection: 104 entities
+
+cell_site_df = pd.read_csv(&quot;input/cell_sites.csv&quot;) 
+cell_site_collection = CellSiteCollection() 
+cell_site_collection.load_from_records(cell_site_df.to_dict('records'))
+
+# CellSiteCollection: 34 entities
+
+# 2. Set up the elevation data handler, that downloads a raster file with elevation data into the data_dir
+
+srtm_data_handler = SRTMDataHandler(srtm_directory=f'/input/srtm1', logger=None)
+
+# 3. Perform POI to cell site visibility
+
+visibility_cellsites = VisibilityCell(
+    points_of_interest=poi_collection,
+    cell_sites=cell_site_collection,
+    srtm_data_handler=srtm_data_handler,
+    search_radius=35,
+    num_visible=3,
+    poi_antenna_height=25,
+    allowed_radio_types=[&quot;4G&quot;, &quot;5G&quot;],
+    earth_radius=6371,
+    refraction_coef=0,
+    logger=None
+)
+
+visibility_cellsites.perform_analysis()
+
+# INFO:visibility_STP:Locating SRTM data files...
+# INFO:visibility_STP:0 data file(s) to download.
+# INFO:visibility_STP:Downloading SRTM data files...
+# INFO:visibility_STP:Fetching from ITU public storage
+# INFO:visibility_STP:Filelist specified, downloading only selected files
+# INFO:visibility_STP:Downloaded completed
+# INFO:visibility_STP:Using 8 processes for parallel computation
+# INFO:visibility_STP:Processing 104 points of interest
+# INFO:visibility_STP:Checking cell site visibility:   0%|          | 0/104 [00:00&lt;?, ?it/s]
+# INFO:visibility_STP:Checking cell site visibility:   1%|          | 1/104 [00:02&lt;03:46,  2.20s/it]
+# INFO:visibility_STP:Checking cell site visibility:  18%|#8        | 19/104 [00:02&lt;00:08,  9.85it/s]
+# INFO:visibility_STP:Checking cell site visibility:  36%|###5      | 37/104 [00:02&lt;00:03, 19.56it/s]
+# INFO:visibility_STP:Checking cell site visibility: 100%|##########| 104/104 [00:02&lt;00:00, 35.79it/s]
+# Visibility Analysis Summary:
+# Number of points of interest: 104
+# Number of cell sites: 34
+# Total visibility checks performed: 1803
+# Average visibility checks per point of interest: 17.34
+# Time taken for SRTM data download: 0.11 seconds
+# Time taken for analysis: 3.0 seconds
+# Total time elapsed: 3.11 seconds
+
+cellsites_results_table = visibility_cellsites.get_results_table()
+
+cellsites_results_table.head()
+
+# poi_id    ict_id  radio_type  ground_distance antenna_los_distance    azimuth_angle   geometry    is_visible  num_visible order
+# 0 be6dc17a-57df-4709-bff1-18f433f7df71    4381fb37-07f8-465a-a654-6bc8df169be0    4G  269 269 211.41  LINESTRING (6.7332108 0.3300316, 6.73195 0.327...   True    3   1
+# 1 be6dc17a-57df-4709-bff1-18f433f7df71    7c4d5ac9-c381-485e-9c3f-99fbb062c837    4G  815 815 353.02  LINESTRING (6.7332108 0.3300316, 6.732319444 0...   True    3   2
+# 2 be6dc17a-57df-4709-bff1-18f433f7df71    cb6229b5-b934-4d5f-a7c1-39f33e1b1d6f    4G  881 881 77.87   LINESTRING (6.7332108 0.3300316, 6.740961111 0...   True    3   3
+# 3 7f4bf645-3665-4658-9913-edcb3fba3b2d    226b6f88-aac8-41af-8c88-6fd30b561afa    4G  683 683 21.55   LINESTRING (6.7235979 0.3330804, 6.725855556 0...   True    3   1
+# 4 7f4bf645-3665-4658-9913-edcb3fba3b2d    b4fbe775-c7e9-4752-b21c-883b84ea08ad    4G  867 869 257.62  LINESTRING (6.7235979 0.3330804, 6.715980556 0...   True    3   2
+
+# 4. Perform POI to POI visibility
+
+visibility_pois = VisibilityPOI(
+    points_of_interest=poi_collection, 
+    cell_sites=cell_site_collection, 
+    srtm_data_handler = srtm_data_handler,
+    search_radius = 35,
+    poi_antenna_height = 25,
+    earth_radius = 6371,
+    refraction_coef = 0,
+    logger = None
+    )
+
+visibility_pois.perform_analysis()
+
+# INFO:visibility_STP:Locating SRTM data files...
+# INFO:visibility_STP:0 data file(s) to download.
+# INFO:visibility_STP:Downloading SRTM data files...
+# INFO:visibility_STP:Fetching from ITU public storage
+# INFO:visibility_STP:Filelist specified, downloading only selected files
+# INFO:visibility_STP:Downloaded completed
+# INFO:visibility_STP:Using 8 processes for parallel computation
+# INFO:visibility_STP:Processing 5356 POI pairs
+# INFO:visibility_STP:Checking POI-to-POI visibility:   0%|          | 0/5356 [00:00&lt;?, ?it/s]
+# INFO:visibility_STP:Checking POI-to-POI visibility:   0%|          | 1/5356 [00:03&lt;4:55:26,  3.31s/it]
+# INFO:visibility_STP:Checking POI-to-POI visibility:   6%|6         | 335/5356 [00:03&lt;00:37, 135.50it/s]
+# INFO:visibility_STP:Checking POI-to-POI visibility:  19%|#8        | 1003/5356 [00:03&lt;00:10, 417.91it/s]
+# INFO:visibility_STP:Checking POI-to-POI visibility:  50%|####9     | 2673/5356 [00:05&lt;00:03, 842.69it/s]
+# INFO:visibility_STP:Checking POI-to-POI visibility:  56%|#####6    | 3007/5356 [00:05&lt;00:02, 903.04it/s]
+# INFO:visibility_STP:Checking POI-to-POI visibility: 100%|##########| 5356/5356 [00:05&lt;00:00, 999.95it/s]
+# INFO:visibility_STP:Analysis completed in 5.57 seconds
+
+pois_results_table = visibility_pois.get_results_table()
+
+pois_results_table.head()
+
+# poi_id    visible_pois    is_visible_pois
+# 0 09b90515-0ecc-4992-9d39-ae208e1c1fea    [1d24a1c9-9d48-4ea0-9aa3-cfdb65d228a1]  True
+# 1 0c16c2e8-db92-411b-a6f7-535fb1810e34    [967c9f47-5162-4f1b-aaa2-a7d77279d40c, 1e83e05...   True
+# 2 1205e5ef-5d91-47b7-8fc0-11ef019263e5    [c77898fa-9377-4552-b2a1-c719f3257dbf, 76d2158...   True
+# 3 1534adf8-b45c-443b-8e1d-87a504e6dc64    [82e467a9-50d8-407f-aa3a-58b68297b55b, 6dda061...   True
+# 4 192c1704-9e7e-4b7a-8ba7-0eed5ae771ad    [26ac2dc1-98e0-4ce7-8c1f-c6935b90ecc4, aeb454b...   True
+</code></pre>
               
             </div>
           </div><footer>

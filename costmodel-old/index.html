@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Documentation for cost model - giga-inframapkit</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Documentation for cost model";
+        var mkdocs_page_input_path = "costmodel-old.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> giga-inframapkit
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../inputdata/">Input data</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../proximity/">Proximity</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../coverage/">Coverage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../demand/">Demand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../fiberpath/">Fiber path</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../visibility/">Visibility</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../costmodel/">Cost model</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">giga-inframapkit</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Documentation for cost model</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="documentation-for-cost-model">Documentation for cost model</h1>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>This document sets out the methodology used to cost the deployment of four connectivity technologies: fiber, cellular, point-to-point microwave and satellite.</p>
+<p>This document also describes the implementation of these cost models using two Python classes: <code>CostModel</code> and <code>TechnologyAssigner</code>. These classes are part of a larger system designed to model costs and assign technologies for network deployment.</p>
+<h2 id="2-cost-model-methodology">2. Cost model methodology</h2>
+<p>The cost model distinguishes between Capital Expenditure (Capex) and Operational Expenditure (Opex):</p>
+<p>Capital Expenditure (Capex):</p>
+<ul>
+<li>Initial hardware investment.</li>
+<li>Periodic hardware refresh costs, scheduled at predetermined intervals.</li>
+</ul>
+<p>Operational Expenditure (Opex):</p>
+<ul>
+<li>Annual maintenance costs, calculated as a percentage of the initial hardware investment.</li>
+<li>Traffic costs, derived by multiplying the annual transit bandwidth cost per 1 Mbps with the channel throughput for each connected point of interest.</li>
+</ul>
+<p>The cost of operating (COO) for the planning period is the sum of both Capex and Opex.</p>
+<p>For each cost model and technology, we describe the model inputs and the model logic below.</p>
+<h3 id="21-fiber-cost-model">2.1 Fiber cost model</h3>
+<p>In the fiber cost model, the parameter <code>expansion_factor</code>, accounts for the surplus of fiber optical cable line that is usually purchased (usually 10% over the required amount).</p>
+<p><strong>Table 1. Fiber cost model inputs.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Parameter</th>
+<th>Variable name</th>
+<th>Measurement unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fiber (fiber)</td>
+<td>Annual access bandwidth cost for 1 Mbps of dedicated internet access channel over a fiber optic cable line</td>
+<td>an_isp_fees_one_mbps_fiber</td>
+<td>USD per Mbps per year</td>
+</tr>
+<tr>
+<td>Fiber (fiber)</td>
+<td>Annual hardware maintenance and replacement costs​</td>
+<td>an_hw_maint_and_repl_fiber</td>
+<td>USD per year​ (as a fraction of hardware CapEx​)</td>
+</tr>
+<tr>
+<td>Fiber (fiber)</td>
+<td>Annual transit bandwidth cost  for 1 Mbps of dedicated internet access channel over a fiber optic cable line</td>
+<td>an_traffic_fees_one_mbps_fiber</td>
+<td>USD per Mbps per year</td>
+</tr>
+<tr>
+<td>Fiber (fiber)</td>
+<td>Fiber optical cable line​ construction cost (materials, equipment, labor)</td>
+<td>focl_constr_cost_fiber</td>
+<td>USD per km​</td>
+</tr>
+<tr>
+<td>Fiber (fiber)</td>
+<td>Hardware refresh after</td>
+<td>reinv_period_fiber</td>
+<td>Years</td>
+</tr>
+<tr>
+<td>Fiber (fiber)</td>
+<td>On-premises hardware setup cost​ (materials, equipment, labor)</td>
+<td>hw_setup_cost_fiber</td>
+<td>USD per school​</td>
+</tr>
+<tr>
+<td>Fiber (fiber)</td>
+<td>Project planning period</td>
+<td>pp_fiber</td>
+<td>Years</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Figure 1. Fiber cost model.</strong></p>
+<p><img alt="fiber-cost-model" src="../diagrams/fiber-cost-model.drawio.svg" /></p>
+<h3 id="22-cellular-cost-model">2.2 Cellular cost model</h3>
+<p><strong>Table 2. Cellular cost model inputs.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Parameter</th>
+<th>Variable name</th>
+<th>Measurement unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cellular (p2area)</td>
+<td>Annual hardware maintenance and replacement costs​</td>
+<td>an_hw_maint_and_repl_p2area</td>
+<td>USD per year​ (as a fraction of hardware CapEx​)</td>
+</tr>
+<tr>
+<td>Cellular (p2area)</td>
+<td>Annual ISP fee for 1 Mbps of dedicated internet access channel over cellular network</td>
+<td>an_isp_fees_one_mbps_p2area</td>
+<td>USD per Mbps per year</td>
+</tr>
+<tr>
+<td>Cellular (p2area)</td>
+<td>Annual Traffic fee for 1 Mbps of dedicated internet access channel over cellular network</td>
+<td>an_traffic_fees_one_mbps_p2area</td>
+<td>USD per Mbps per year</td>
+</tr>
+<tr>
+<td>Cellular (p2area)</td>
+<td>On-premises hardware setup cost​ (materials, equipment, labor)</td>
+<td>hw_setup_cost_p2area</td>
+<td>USD per school​</td>
+</tr>
+<tr>
+<td>Cellular (p2area)</td>
+<td>Project planning period</td>
+<td>pp_p2area</td>
+<td>Years</td>
+</tr>
+<tr>
+<td>Cellular (p2area)</td>
+<td>Reinvest into hardware after</td>
+<td>reinv_period_p2area</td>
+<td>Years</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Figure 2. Cellular cost model.</strong></p>
+<p><img alt="cellular-cost-model" src="../diagrams/cellular-cost-model.drawio.svg" /></p>
+<h3 id="23-point-to-point-microwave-cost-model">2.3 Point-to-point microwave cost model</h3>
+<p>In the point-to-point model, the cost model incorporates three new types of infrastructure: access links, backhaul links and retransmission towers. Capital expenditure is required to set up these materials, which also generate one-time and annual license fees.</p>
+<p><strong>Table 3. Point-to-point cost model inputs.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Parameter</th>
+<th>Variable name</th>
+<th>Measurement unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Annual hardware maintenance and replacement costs​</td>
+<td>an_hw_maint_and_repl_p2p</td>
+<td>USD per year​ (as a fraction of hardware CapEx​)</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Annual ISP fee for 1 Mbps of dedicated internet access channel over a P2P microwave link</td>
+<td>an_isp_fees_one_mbps_p2p</td>
+<td>USD per Mbps per year</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Annual recurring license fee for 1MHz</td>
+<td>an_license_fee_1mhz_p2p</td>
+<td>USD per MHz per year</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Annual Traffic fee for 1 Mbps of dedicated internet access channel over a P2P microwave link</td>
+<td>an_traffic_fees_one_mbps_p2p</td>
+<td>USD per Mbps per year</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Bandwidth per access link</td>
+<td>access_link_bandwidth_p2p</td>
+<td>MHz</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Bandwidth per backhaul link</td>
+<td>backhaul_link_bandwidth_p2p</td>
+<td>MHz</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Microwave point-to-point access link installation and comissioning cost (materials, equipment, labor)</td>
+<td>access_link_setup_p2p</td>
+<td>USD per hop​</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Microwave point-to-point backhaul link installation and comissioning cost (materials, equipment, labor)</td>
+<td>backhaul_link_setup_p2p</td>
+<td>USD per hop​</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Number of microwave point-to-point backhaul links</td>
+<td>backhaul_link_num_p2p</td>
+<td>Links</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Number of retransmission telecommunication towers</td>
+<td>retr_tower_num_p2p</td>
+<td>Towers</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>One time license fee for 1MHz</td>
+<td>one_time_license_fee_1mhz_p2p</td>
+<td>USD per MHz</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>On-premises hardware setup cost​ (materials, equipment, labor)</td>
+<td>hw_setup_cost_p2p</td>
+<td>USD per school​</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Project planning period</td>
+<td>pp_p2p</td>
+<td>Years</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Reinvest into hardware after</td>
+<td>reinv_period_p2p</td>
+<td>Years</td>
+</tr>
+<tr>
+<td>Point to point microwave (p2p)</td>
+<td>Retransmission telecommunication tower installation cost</td>
+<td>retr_tower_inst_p2p</td>
+<td>USD per tower</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Figure 3. Point-to-point microwave cost model.</strong></p>
+<p><img alt="p2p-cost-model" src="../diagrams/p2p-cost-model.drawio.svg" /></p>
+<h3 id="24-satellite-cost-model">2.4 Satellite cost model</h3>
+<p><strong>Table 4. Satellite cost model inputs.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Parameter</th>
+<th>Variable name</th>
+<th>Measurement unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Satellite (satellite)</td>
+<td>Annual hardware maintenance and replacement costs​</td>
+<td>an_hw_maint_and_repl_sat</td>
+<td>USD per year​ (as a fraction of hardware CapEx​)</td>
+</tr>
+<tr>
+<td>Satellite (satellite)</td>
+<td>Annual ISP fee for 1 Mbps of dedicated internet access channel over satellite channel</td>
+<td>an_isp_fees_one_mbps_sat</td>
+<td>USD per Mbps per year</td>
+</tr>
+<tr>
+<td>Satellite (satellite)</td>
+<td>Annual Traffic fee for 1 Mbps of dedicated internet access channel over satellite channel</td>
+<td>an_traffic_fees_one_mbps_sat</td>
+<td>USD per Mbps per year</td>
+</tr>
+<tr>
+<td>Satellite (satellite)</td>
+<td>On-premises hardware setup cost​ (materials, equipment, labor)</td>
+<td>hw_setup_cost_sat</td>
+<td>USD per school​</td>
+</tr>
+<tr>
+<td>Satellite (satellite)</td>
+<td>Project planning period</td>
+<td>pp_sat</td>
+<td>Years</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Figure 4. Satellite cost model.</strong></p>
+<p><img alt="satellite-cost-model" src="../diagrams/satellite-cost-model.drawio.svg" /></p>
+<h2 id="3-implementing-the-cost-model">3. Implementing the cost model</h2>
+<h3 id="31-costmodel-class">3.1 CostModel Class</h3>
+<h4 id="311-overview">3.1.1 Overview</h4>
+<p>The <code>CostModel</code> class is designed to model the costs associated with deploying and maintaining various types of network connections, including fiber, cellular (P2Area), point-to-point (P2P), and satellite.</p>
+<h4 id="312-attributes">3.1.2 Attributes</h4>
+<ul>
+<li><strong><code>primary_tech_params</code></strong> (pd.DataFrame): Cost parameters. This includes, for example, the cost of laying down one kilometer of fiber optical cable line. The columns <code>Variable name</code> and <code>Value</code> are required. Refer to the tables 1 to 4 in the documentation for information on each cost parameter. Run <code>CostModel.get_required_keys()</code> to see which values of column <code>Variable name</code> are required.</li>
+<li><strong><code>poi_num</code></strong> (dict): Number of points of interest (POIs) for different technologies. The keys to this dictionary are are <strong>fiber</strong>, <strong>p2area</strong>, <strong>p2p</strong> and <strong>satellite</strong>, and the default values are 1 POI for each technology.</li>
+<li><strong><code>ch_throughput</code></strong> (dict): Channel throughput for different technologies. The keys to this dictionary are <strong>fiber</strong>, <strong>p2area</strong>, <strong>p2p</strong> and <strong>satellite</strong>, and the default values are 1 mbps (Megabits per second) for each technology.</li>
+<li><strong><code>focl_length_fiber</code></strong> (float): Length of fiber optic cable for fiber technology, in kilometers.</li>
+<li><code>expansion_factor</code> (float): Factor to expand fiber optic cable length. This is set by default to 1.1, meaning that operators will purchase an additional 10% of fiber optic cable than is strictly required.</li>
+<li><strong><code>logger</code></strong> (logging.Logger): Logger instance. If none is provided, one is created.</li>
+</ul>
+<h4 id="313-methods">3.1.3 Methods</h4>
+<p>Each technology has its own associated cost method, which returns cost results inside a dictionary with keys <strong>number_poi</strong>, <strong>ch_throughput</strong>, <strong>pp_coo</strong>, <strong>pp_coo_per_per_poi</strong>, <strong>pp_capex</strong>, <strong>init_capex</strong>, <strong>an_opex</strong>, <strong>init_capex_per_poi</strong> and <strong>an_opex_per_poi</strong>. In addition, the results from <code>compute_fiber_costs()</code> also include the <strong>fiber_length</strong>. Cost results are also stored in the class attribute <code>_results_table</code>.</p>
+<ul>
+<li><strong><code>compute_fiber_costs</code></strong><code>()</code>: Calculate costs for fiber network deployment.</li>
+<li><strong><code>compute_cellular_costs</code></strong><code>()</code>: Calculate costs for cellular network deployment.</li>
+<li><strong><code>compute_p2p_costs</code></strong><code>()</code>: Calculate costs for point-to-point network deployment.</li>
+<li><strong><code>compute_satellite_costs</code></strong><code>()</code>: Calculate costs for satellite network deployment.</li>
+<li><strong><code>compute_costs</code></strong><code>()</code>: Compute costs for all types of connections.</li>
+<li><strong><code>get_results_table</code></strong><code>()</code>: Return results as a DataFrame.</li>
+<li><strong><code>reset_parameters()</code></strong>: Reset parameters <code>poi_num</code> , <code>ch_throughput</code> and <code>focl_length_fiber</code> to default values.</li>
+</ul>
+<h4 id="314-usage-example">3.1.4 Usage Example</h4>
+<pre><code class="language-python"># Print the first five rows of cost model inputs
+print(cost_inputs.head())
+
+#                 Variable name   Value
+# 0         hw_setup_cost_fiber   500.0
+# 1      focl_constr_cost_fiber  8000.0
+# 2          reinv_period_fiber     3.0
+# 3  an_hw_maint_and_repl_fiber     0.1
+# 4                    pp_fiber    10.0
+
+# Initialize an instance of CostModel class for a scenario where
+  # We are connecting 15 POIs with each technology
+  # The total channel_throughput associated with each technology is 10 mbps 
+  # 10 kilometers of fiber optic cable line are required to connect those 15 POIs with fiber
+
+costmodel = CostModel(primary_tech_params=cost_inputs,
+                      poi_num = {'fiber': 15, 'p2area': 15, 'p2p': 15, 'satellite': 15},
+                      ch_throughput = {'fiber': 10, 'p2area': 10, 'p2p': 10, 'satellite': 10},
+                      focl_length_fiber = 5)
+
+# Compute costs for each technology
+costmodel.compute_costs()
+
+# Get cost results in DataFrame format and display first five rows
+costodel.get_results_table()
+
+#   cost_type       technology    value
+# 0 number_poi      fiber         1.00000
+# 1 fiber_length    fiber         5.00000
+# 2 ch_throughput   fiber         10.00000
+# 3 pp_coo          fiber         91700.00000
+# 4 pp_coo_per_poi  fiber         91700.00000
+</code></pre>
+<h3 id="32-technologyassigner-class">3.2 TechnologyAssigner Class</h3>
+<h4 id="321-overview">3.2.1 Overview</h4>
+<p>The <code>TechnologyAssigner</code> class is responsible for assigning technologies to Points of Interest (POIs).</p>
+<p>First, the <strong>feasibility</strong> of connecting each POI with the four technologies is assessed. The feasibility criteria are inferred from the results of the proximity, coverage, demand, fiber path and visibility analyses. For example, it might not be feasible to connect a POI using point-to-point microwave technology because there are no visible cell towers from the POI location.</p>
+<p>Second, among the feasible technologies, a technology is assigned to each POI based on either minimum costs or user preferences.</p>
+<ul>
+<li><strong>Costs</strong>: In this scenario, POIs are assigned the cheapest technology, based on the provided cost model and POI characteristics.</li>
+<li><strong>User preferences</strong>: In this scenario, POIs are assigned the preferred technology based on the provided ranking of technologies.</li>
+</ul>
+<h4 id="322-attributes">3.2.2 Attributes</h4>
+<ul>
+<li><strong><code>used_technologies</code></strong> (dict): Technologies to be used in the analysis. If a technology is set to <code>False</code> then POIs will never be assigned that technology. See example below.</li>
+</ul>
+<pre><code class="language-python">{'fiber': True, 'p2mp': True, 'p2p': True, 'satellite': True}
+</code></pre>
+<ul>
+<li><strong><code>ranking_dictionary</code></strong> (dict): User-defined ranking of technologies, used by the method <code>assign_technology</code> if assigning technologies based on user preferences (<code>scenario</code> =<code>ranking</code> ). See example below.</li>
+</ul>
+<pre><code class="language-python">{'fiber': 1, 'p2mp': 2, 'p2p': 3, 'satellite': 4}
+</code></pre>
+<ul>
+<li><strong><code>mapping_results</code></strong> (pd.DataFrame): Results of proximity, coverage and demand analysis. This DataFrame has one row per POI. This table must contain the following columns:<ul>
+<li><strong>poi_id</strong>: POI identifier.</li>
+<li><strong>lat</strong>: POI latitude.</li>
+<li><strong>lon</strong>: POI longitude.</li>
+<li><strong>cell_site_dist</strong>: distance to the closest cell tower.</li>
+<li><strong>4G_coverage</strong>: whether the POI has 4G coverage.</li>
+<li><strong>is_connected</strong>: whether the POI is already connected.</li>
+<li><strong>total_mbps</strong>: connectivity demand associated with POI.</li>
+</ul>
+</li>
+<li><strong><code>visibility_results</code></strong> (pd.DataFrame): Results of visibility analysis. This table must contain the following columns:<ul>
+<li><strong>is_visible</strong>: whether the POI is visible from a cell tower.</li>
+<li><strong>num_visible</strong>: number of cell towers that are visible from the POI.</li>
+<li><strong>antenna_los_distance</strong>: line-of-sight distance to the nearest antenna.</li>
+</ul>
+</li>
+<li><strong><code>fiberpath_results</code></strong> (pd.DataFrame): Results of fiber path analysis. This table must contain the following columns:<ul>
+<li><strong>max_dist_km</strong>: The maximum length of the fiber optic cable used to connect the POI (between the POI and the closest connected node, which is not necessarily a transmission node).</li>
+<li><strong>fiber_path</strong>: Sequence of nodes between the POI the transmission node.</li>
+<li><strong>upstream_node_distance</strong>: Distance in meters to the next node in the POI's fiber path.</li>
+</ul>
+</li>
+<li><strong><code>max_fiber_dist_km_per_poi</code></strong> (int): Maximum fiber optic cable distance allowed per POI (between the POI and the next node in the POI's fiber path). This value must also exist in the column <code>max_dist_km</code> of the provided dataset <code>fiberpath_results</code>. If the length proposed by the fiber path solution to connect a POI is larger than <code>max_fiber_dist_km_per_poi</code> , then connecting this POI with fiber is not feasible.</li>
+<li><strong><code>max_cell_dist_km_per_poi</code></strong> (float): Maximum distance allowed between a POI and a cell tower. If the distance between a POI and the nearest cell tower is larger than <code>max_cell_dist_km_per_poi</code>, then connecting this POI with cellular technology is not feasible.</li>
+<li><strong><code>cost_model</code></strong> (CostModel): Instance of the CostModel class.</li>
+</ul>
+<h4 id="323-methods">3.2.3 Methods</h4>
+<ul>
+<li><strong><code>check_feasibility</code></strong><code>()</code>: Check feasibility of each technology for connecting POIs. Feasibility is assessed using the following inputs, available as class attributes:<ul>
+<li><code>used_technologies</code></li>
+<li><code>mapping_results</code> and <code>max_cell_dist_km_per_poi</code></li>
+<li><code>visibility_results</code></li>
+<li><code>fiberpath_results</code> and <code>max_fiber_dist_km_per_poi</code></li>
+</ul>
+</li>
+</ul>
+<p>Returns a table with one row per POI and four columns: fiber_feasible, p2area_feasible, p2p_feasible and satellite_feasible</p>
+<ul>
+<li><strong><code>compute_cost_per_poi</code></strong><code>()</code>: Compute cost for each POI for each technology, based on the provided cost model (<code>cost_model</code>). The costs are personalized to each POI, based on that POI's connectivity demand (in mbps) and, for fiber, based on the length of fiber optical cable that would be required to connect that POI with fiber.</li>
+</ul>
+<p>Returns a DataFrame with one row per POI and four columns: fiber_cost, p2area_cost, p2p_cost and satellite_cost</p>
+<ul>
+<li><strong><code>assign_technology(</code></strong><code>scenario</code><strong><code>)</code></strong>: Assign feasible technologies based on chosen scenario. The parameter <code>scenario</code> can take one of the following values: <code>lowest_cost</code> or <code>ranking</code>.<ul>
+<li>If assigning technologies based on <code>lowest_cost</code>, then each POI gets assigned the technology with the lowest cost according to the method <code>compute_cost_per_poi().</code></li>
+<li>If assigning technologies based on <code>ranking</code> , then each POI gets assigned the technology with the highest rank according to the input <code>ranking_dictionary</code>.</li>
+</ul>
+</li>
+</ul>
+<p>This method enforces a technology assignment solution with a feasible fiber path, meaning that a POI can connect to a transmission node through other POIs that are also connected with fiber.</p>
+<p>Returns a DataFrame with one row per POI and one column: technology.</p>
+<ul>
+<li><code>get_results_table()</code>: Generate aggregated metrics on technology assignments solution. Returns a DataFrame with the following values for each technology: poi_num, total_mbps and fiber_length.</li>
+</ul>
+<h4 id="324-usage-examples">3.2.4 Usage Examples</h4>
+<pre><code class="language-python"># Initialize an instance of CostModel class
+costmodel = CostModel(primary_tech_params=cost_inputs)
+
+# Visualize first five rows of cost_inputs
+print(cost_inputs.head())
+#                 Variable name   Value
+# 0         hw_setup_cost_fiber   500.0
+# 1      focl_constr_cost_fiber  8000.0
+# 2          reinv_period_fiber     3.0
+# 3  an_hw_maint_and_repl_fiber     0.1
+# 4                    pp_fiber    10.0
+
+# Initialize an instance of TechnologyAssigner, and provide the cost model defined above as an input
+assigner = TechnologyAssigner(
+    used_technologies=used_technologies,
+    ranking_dictionary=ranking_dictionary, 
+    mapping_results=mapping_results, #output of proximity, coverage and demand models analyses
+    visibility_results=visibility_results, #output of visibility
+    fiberpath_results=fiberpath_results, #output of fiber path analysis
+    max_fiber_dist_km_per_poi=1, # 1km
+    max_cell_dist_km_per_poi=1, # 1km
+    cost_model=costmodel) # Cost model defined above
+
+# View assigner inputs
+  # used technologies
+print(used_technologies)
+# {'fiber': True, 'p2mp': True, 'p2p': True, 'satellite': True}
+
+  #ranking_dictionary
+print(ranking_dictionary)
+# {'fiber': 1, 'p2mp': 2, 'p2p': 3, 'satellite': 4}
+
+  #mapping_results
+print(mapping_results.head())
+#                                  poi_id        lat       lon  cell_site_dist  \
+# 0  23dd6a45-3656-435b-b3b1-c16efab9daeb  39.007771  1.561872            1158   
+# 1  e13a657c-edf0-4013-92db-6c70136e3ac9  38.906858  1.275420            2817   
+# 2  de75c87b-2676-47be-8454-4c44c4e6f644  38.993134  1.353725             646   
+# 3  4267fc81-0e9f-40ca-84c8-84529958dc22  39.004266  1.525952            1066   
+# 4  ae0ccc6e-5f91-4a58-a60b-68e8ebcdc797  38.956769  1.323312             462   
+
+#    4G_coverage  is_connected  total_mbps  
+# 0          1.0             0       32800  
+# 1          0.0             0        2400  
+# 2          0.0             0       10300  
+# 3          1.0             0       14900  
+# 4          0.0             0       21300
+
+  #visibility_results
+print(visibility_results.head())
+#                                  poi_id                                ict_id  \
+# 0  23dd6a45-3656-435b-b3b1-c16efab9daeb  f7412e93-8fb4-4abf-a298-8fb0876a97f5   
+# 1  23dd6a45-3656-435b-b3b1-c16efab9daeb  ad9f5591-f2fd-4ec6-a35f-31c4fb8d7013   
+# 2  23dd6a45-3656-435b-b3b1-c16efab9daeb  4ea23bde-9f03-4e96-871d-59276323e1c2   
+# 3  e13a657c-edf0-4013-92db-6c70136e3ac9  8a4cfe6a-ce1a-4096-84dc-be09b32b8567   
+# 4  de75c87b-2676-47be-8454-4c44c4e6f644  9429f910-1d6b-4e52-8bb4-6f331d21e7ee   
+
+#    ground_distance  antenna_los_distance  is_visible  num_visible  
+# 0           1502.0                1503.0        True            3  
+# 1           1784.0                1784.0        True            3  
+# 2           2598.0                2598.0        True            3  
+# 3           4814.0                4825.0        True            1  
+# 4            646.0                 647.0        True            3
+
+  #fiberpath_results
+print(fiberpath_results.head())
+#                                  poi_id  max_dist_km  \
+# 0  5b9fbca7-20b7-4b7a-8555-1be8137a8e12          1.0   
+# 1  798ec30c-be58-4b93-9ebb-e6979cf73336          1.0   
+# 2  07514ee2-1dd3-4e93-a5fb-8a1a70b64edd          1.0   
+# 3  304e1e26-439a-45fb-8837-9a38fdc6ec41          1.0   
+# 4  03116452-1288-434e-83d5-fed21199c4a8          1.0   
+
+#                                           fiber_path  \
+# 0           ['278a16fe-081f-4d8d-bd4b-8fd8400ae23f']   
+# 1  ['99fbad83-671b-47b4-9241-af3aa1e160ce', '8212...   
+# 2           ['8ad3e27f-e257-40bb-bdde-005c547536e8']   
+# 3           ['926790f6-1345-4cab-92eb-0d28185e2d54']   
+# 4           ['090dcd28-f45e-42b6-be51-73fa90b3e7f7']   
+
+#                        upstream_node_id  upstream_node_distance  
+# 0  278a16fe-081f-4d8d-bd4b-8fd8400ae23f                 660.705  
+# 1  8212c26b-ccf0-4c70-8c8b-0bd759f2cbff                 727.908  
+# 2  8ad3e27f-e257-40bb-bdde-005c547536e8                 277.562  
+# 3  926790f6-1345-4cab-92eb-0d28185e2d54                 862.034  
+# 4  090dcd28-f45e-42b6-be51-73fa90b3e7f7                 478.980
+
+# Check feasibility of each technology
+assigner.check_feasibility()
+#   poi_id  fiber_feasible  p2area_feasible p2p_feasible    satellite_feasible
+# 0 005e4a38-ee50-41b2-a7ba-fd8fd86c5179    False   False   True    True
+# 1 019d2f45-228e-4943-b302-1af7cb2ae820    False   False   False   True
+# 2 03116452-1288-434e-83d5-fed21199c4a8    True    False   True    True
+# 3 033ae344-5dde-4ee7-8abd-9c83729197bf    True    False   True    True
+# 4 04da0ba1-3b87-4a8e-bb66-72ac9a19f1cd    False   False   True    True
+
+# Compute cost 
+assigner.compute_cost_per_poi()
+# poi_id    fiber_cost  p2area_cost p2p_cost    satellite_cost
+# 0 005e4a38-ee50-41b2-a7ba-fd8fd86c5179    NaN 3192400.0   3.211048e+06    3202200.0
+# 1 019d2f45-228e-4943-b302-1af7cb2ae820    NaN 7488400.0   7.507048e+06    7498200.0
+# 2 03116452-1288-434e-83d5-fed21199c4a8    9464548.0   1032400.0   1.051048e+06    1042200.0
+# 3 033ae344-5dde-4ee7-8abd-9c83729197bf    18099194.4  1104400.0   1.123048e+06    1114200.0
+# 4 04da0ba1-3b87-4a8e-bb66-72ac9a19f1cd    NaN 21876400.0  2.189505e+07    21886200.0
+
+# Assign technologies based on the lowest cost
+assigner.assign_technology(scenario=&quot;lowest_cost&quot;)
+# poi_id  technology    
+# f4757abf-5db7-4f0e-a7cc-0c437012a72e  satellite
+# b32e5cdd-cc23-4748-9c61-c62201237bf6  satellite
+# 8955c08a-d3a8-4dd0-872a-09489285a97a  satellite
+# 9b09549f-3f66-4a26-beda-db793cd49363  p2area
+# 798ec30c-be58-4b93-9ebb-e6979cf73336  satellite
+# ...   ...
+# f5d03633-ba23-4de9-80ea-e5ae1b82acfa  satellite
+# f8e815fd-fcbe-4607-9ae0-f5fa0d56c8d8  satellite
+# f9394e7c-c097-4bd1-98c1-c36ab13dde8e  satellite
+# fa2f7383-f6dd-4b0e-9db6-269f8f5d4a17  satellite
+# feaecc5f-7357-48b4-9cc8-a845d67ecb4c  satellite
+
+# Assign technologies based on ranking
+assigner.assign_technology(scenario=&quot;ranking&quot;)
+# poi_id      technology    
+# f4757abf-5db7-4f0e-a7cc-0c437012a72e  fiber
+# b32e5cdd-cc23-4748-9c61-c62201237bf6  fiber
+# 8955c08a-d3a8-4dd0-872a-09489285a97a  fiber
+# 9b09549f-3f66-4a26-beda-db793cd49363  fiber
+# 798ec30c-be58-4b93-9ebb-e6979cf73336  fiber
+# ...   ...
+# f5d03633-ba23-4de9-80ea-e5ae1b82acfa  p2p
+# f8e815fd-fcbe-4607-9ae0-f5fa0d56c8d8  p2p
+# f9394e7c-c097-4bd1-98c1-c36ab13dde8e  p2p
+# fa2f7383-f6dd-4b0e-9db6-269f8f5d4a17  p2p
+# feaecc5f-7357-48b4-9cc8-a845d67ecb4c  p2p
+
+# View summary of results
+assigner.get_results_table()
+#   technology  metric  value   type
+# 0 fiber   fiber_length    0.0 unconnected
+# 1 fiber   poi_num 0.0 unconnected
+# 2 p2area  poi_num 8.0 unconnected
+# 3 p2p poi_num 0.0 unconnected
+# 4 satellite   poi_num 92.0    unconnected
+</code></pre>
+<h3 id="33-integration-and-workflow">3.3 Integration and Workflow</h3>
+<p>The diagram below shows how a typical workflow for cost modelling and technology assignment works, allowing for two different ways of assigning technologies: minimum costs or a ranking.</p>
+<p><img alt="cost-model-integration" src="../diagrams/cost-model-integration.drawio.svg" /></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

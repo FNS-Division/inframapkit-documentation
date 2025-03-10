@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Input data - giga-inframapkit</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Input data";
+        var mkdocs_page_input_path = "inputdata.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> giga-inframapkit
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Input data</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#points-of-interest-poi">Points of interest (POI)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cell-sites">Cell sites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#transmission-nodes">Transmission nodes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mobile-coverage">Mobile coverage</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../proximity/">Proximity</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../coverage/">Coverage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../demand/">Demand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../fiberpath/">Fiber path</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../visibility/">Visibility</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../costmodel/">Cost model</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">giga-inframapkit</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Input data</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="datasets">Datasets</h1>
+<p>This page summarizes the data user-provided required by the toolkit. The provided data must conform to the standards below.</p>
+<h2 id="points-of-interest-poi">Points of interest (POI)</h2>
+<table>
+<thead>
+<tr>
+<th>Column name</th>
+<th>Column type</th>
+<th>Levels</th>
+<th>Example</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>poi_id</td>
+<td>UUID</td>
+<td></td>
+<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>Yes</td>
+<td>Unique identifier for the POI</td>
+</tr>
+<tr>
+<td>dataset_id</td>
+<td>UUID</td>
+<td></td>
+<td>987fcdeb-51a2-12d3-a456-426614174000</td>
+<td>Yes</td>
+<td>Unique identifier for the dataset</td>
+</tr>
+<tr>
+<td>lat</td>
+<td>float</td>
+<td></td>
+<td>36.7538</td>
+<td>Yes</td>
+<td>Latitude coordinate</td>
+</tr>
+<tr>
+<td>lon</td>
+<td>float</td>
+<td></td>
+<td>3.0588</td>
+<td>Yes</td>
+<td>Longitude coordinate</td>
+</tr>
+<tr>
+<td>poi_type</td>
+<td>string</td>
+<td></td>
+<td>school</td>
+<td>No</td>
+<td>Type of point of interest</td>
+</tr>
+<tr>
+<td>is_public</td>
+<td>boolean</td>
+<td></td>
+<td>True</td>
+<td>No</td>
+<td>Whether the POI is public or private</td>
+</tr>
+<tr>
+<td>poi_subtype</td>
+<td>string</td>
+<td></td>
+<td>primary school</td>
+<td>No</td>
+<td>Specific subtype of the POI</td>
+</tr>
+<tr>
+<td>country_code</td>
+<td>string</td>
+<td></td>
+<td>DZA</td>
+<td>Yes</td>
+<td>ISO 3166-1 alpha-3 country code</td>
+</tr>
+<tr>
+<td>is_connected</td>
+<td>boolean</td>
+<td></td>
+<td>True</td>
+<td>Yes</td>
+<td>Whether the POI has connectivity</td>
+</tr>
+<tr>
+<td>connectivity_type</td>
+<td>string</td>
+<td></td>
+<td>fiber</td>
+<td>Yes</td>
+<td>Type of internet connectivity</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cell-sites">Cell sites</h2>
+<table>
+<thead>
+<tr>
+<th>Column name</th>
+<th>Column type</th>
+<th>Levels</th>
+<th>Example</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ict_id</td>
+<td>UUID</td>
+<td></td>
+<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>Yes</td>
+<td>Cell tower identifier</td>
+</tr>
+<tr>
+<td>dataset_id</td>
+<td>UUID</td>
+<td></td>
+<td>987fcdeb-51a2-12d3-a456-426614174000</td>
+<td>Yes</td>
+<td>Unique identifier for the dataset</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>float</td>
+<td></td>
+<td>38.988755</td>
+<td>Yes</td>
+<td>Cell tower geographical latitude</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>float</td>
+<td></td>
+<td>1.401938</td>
+<td>Yes</td>
+<td>Cell tower geographical longitude</td>
+</tr>
+<tr>
+<td>operator_name</td>
+<td>string</td>
+<td></td>
+<td>TelOperator</td>
+<td>No</td>
+<td>Mobile network operator name</td>
+</tr>
+<tr>
+<td>radio_type</td>
+<td>string</td>
+<td>2G, 3G, 4G, 5G</td>
+<td>4G</td>
+<td>Yes</td>
+<td>Type of radio transmission technology</td>
+</tr>
+<tr>
+<td>antenna_height_m</td>
+<td>float</td>
+<td></td>
+<td>25</td>
+<td>Yes</td>
+<td>Antenna height on the tower or building</td>
+</tr>
+<tr>
+<td>backhaul_type</td>
+<td>string</td>
+<td>fiber, microwave, satellite</td>
+<td>fiber</td>
+<td>No</td>
+<td>Type of backhaul connectivity of the cell tower</td>
+</tr>
+<tr>
+<td>backhaul_throughput_mbps</td>
+<td>float</td>
+<td></td>
+<td>1000</td>
+<td>No</td>
+<td>Equipped throughput of the backhaul</td>
+</tr>
+</tbody>
+</table>
+<h2 id="transmission-nodes">Transmission nodes</h2>
+<table>
+<thead>
+<tr>
+<th>Column name</th>
+<th>Column type</th>
+<th>Levels</th>
+<th>Example</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ict_id</td>
+<td>UUID</td>
+<td></td>
+<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>Yes</td>
+<td>Node identifier</td>
+</tr>
+<tr>
+<td>dataset_id</td>
+<td>UUID</td>
+<td></td>
+<td>987fcdeb-51a2-12d3-a456-426614174000</td>
+<td>Yes</td>
+<td>Unique identifier for the dataset</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>float</td>
+<td></td>
+<td>38.988755</td>
+<td>Yes</td>
+<td>Geographical latitude</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>float</td>
+<td></td>
+<td>1.401938</td>
+<td>Yes</td>
+<td>Geographical longitude</td>
+</tr>
+<tr>
+<td>operator_name</td>
+<td>string</td>
+<td></td>
+<td>TelOperator</td>
+<td>No</td>
+<td>Name of the mobile operator</td>
+</tr>
+<tr>
+<td>infrastructure_type</td>
+<td>string</td>
+<td>fiber, microwave, other</td>
+<td>fiber</td>
+<td>Yes</td>
+<td>Type of Infrastructure</td>
+</tr>
+<tr>
+<td>node_status</td>
+<td>string</td>
+<td>operational, planned, under construction</td>
+<td>operational</td>
+<td>Yes</td>
+<td>Status of the node</td>
+</tr>
+<tr>
+<td>equipped_capacity_mbps</td>
+<td>float</td>
+<td></td>
+<td>1000</td>
+<td>No</td>
+<td>Equipped bandwidth ready for use to connect subscribers</td>
+</tr>
+<tr>
+<td>potential_capacity_mbps</td>
+<td>float</td>
+<td></td>
+<td>2000</td>
+<td>No</td>
+<td>Total theoretical bandwidth available for subscriber connections</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mobile-coverage">Mobile coverage</h2>
+<table>
+<thead>
+<tr>
+<th>Column name</th>
+<th>Column type</th>
+<th>Levels</th>
+<th>Example</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fid</td>
+<td>str</td>
+<td></td>
+<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>Yes</td>
+<td>Unique identifier for polygons</td>
+</tr>
+<tr>
+<td>coverage</td>
+<td>int</td>
+<td></td>
+<td>1</td>
+<td>Yes</td>
+<td>Should be equal to 1 for all rows</td>
+</tr>
+<tr>
+<td>geometry</td>
+<td>geometry</td>
+<td></td>
+<td>POLYGON((-74.0060 40.7128, -73.9857 40.7484, -73.9772 40.7516, -74.0060 40.7128))</td>
+<td>Yes</td>
+<td>Mobile coverage polygons</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../proximity/" class="btn btn-neutral float-right" title="Proximity">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../proximity/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
