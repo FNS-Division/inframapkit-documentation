@@ -80,6 +80,22 @@ _Figure: Output of fiber path algorithm_
 | get_fiber_path_nodes_edges(fiber_path_graph) | `dict` | Gets nodes and edges from the fiber path graph |
 | path_total_from_nx_graph(graph, node_list, metric) | `float` | Calculates the total path length or cost |
 
+## Outputs
+
+The `get_results_table()` method produces a DataFrame with the following columns: 
+
+- closest_node_id 
+- closest_node_distance
+- connected_node_id
+- connected_node_distance
+- fiber_path
+- upstream_node_id
+- upstream_node_distance
+
+These are summarized in the diagram below. In this example, the points of interest are schools.
+
+![fiber-results](img/fiberpath-output.png)
+
 ## Example
 
 ```python

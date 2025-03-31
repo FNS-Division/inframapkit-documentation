@@ -86,7 +86,7 @@ The CostModel class calculates deployment and operational costs for telecommunic
 | compute_electricity_costs(poi_num, pp) | `pd.DataFrame` | Calculates electricity costs |
 | perform_analysis(poi_data) | `pd.DataFrame` | Computes POI-level costs across all technology options for a given dataset |
 
-The cost calculation methods (`compute_fiber_costs`, `compute_p2area_costs`, `compute_p2p_costs`, `compute_satellite_costs`, `compute_electricity_costs`) each produce an output with the following keys:
+The cost calculation methods (`compute_fiber_costs`, `compute_p2area_costs`, `compute_p2p_costs`, `compute_satellite_costs`, `compute_electricity_costs`) each produce a `pd.DataFrame` output with the following keys:
 
 - `technology`: The technology type being analyzed (in this example "satellite", but could also be fiber, p2area, p2p, or electricity)
 - `number_poi`: Number of points of interest (POIs) included in this calculation
@@ -101,7 +101,7 @@ The cost calculation methods (`compute_fiber_costs`, `compute_p2area_costs`, `co
 - `init_capex`: Initial capital expenditure - the upfront investment required to deploy the technology
 - `annual_revenue`: Average annual revenue (calculated as total planning period revenue divided by number of years)
 - `annual_revenue_per_poi`: Average annual revenue per POI
-- `annual_cost`: Average annual cost (includes amortized CAPEX and annual OPEX)
+- `annual_cost`: Average annual cost (includes CAPEX and OPEX)
 - `annual_cost_per_poi`: Average annual cost per POI - a key metric for comparing the cost-effectiveness of different technologies
 
 The method `perform_analysis(poi_data)` should be provided with an input DataFrame with the following columns:

@@ -1,11 +1,13 @@
 site_name: giga-inframapkit
 nav:
   - Home: index.md
+  - Model integations: integrations.md
   - Input data: inputdata.md
   - Proximity: proximity.md
   - Coverage: coverage.md
   - Demand: demand.md
   - Fiber path: fiberpath.md
   - Visibility: visibility.md
-  - Cost model: costmodel.md
+  - Cost: costmodel.md
+  - Technology Assignment: assignment.md
 theme: readthedocs
