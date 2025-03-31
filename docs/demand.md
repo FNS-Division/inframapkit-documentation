@@ -46,7 +46,6 @@ _Figure. Population counts around Points of Interest using non-overlapping buffe
 ## Methods
 
 - **perform_analysis()**: Executes demand analysis based on population distribution around POIs.
-- **get_neighbor_population_pixels()**: Retrieves population data for neighboring pixels around POIs.
 - **get_results_table()**: Returns formatted results including traffic demand estimates.
 - **get_storage_table()**: Returns raw analysis data.
 - **format_analysis_summary()**: Returns a human-readable summary of analysis statistics.
