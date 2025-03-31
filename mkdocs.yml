@@ -1,7 +1,7 @@
 site_name: giga-inframapkit
 nav:
   - Home: index.md
-  - Model integations: integrations.md
+  - Models Integration Framework: integrations.md
   - Input data: inputdata.md
   - Proximity: proximity.md
   - Coverage: coverage.md
@@ -10,4 +10,4 @@ nav:
   - Visibility: visibility.md
   - Cost: costmodel.md
   - Technology Assignment: assignment.md
-theme: readthedocs
+theme: material

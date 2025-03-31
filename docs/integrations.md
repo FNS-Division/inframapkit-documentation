@@ -1,4 +1,4 @@
-# Model integration
+# Models Integration Framework
 
 The diagram below summarizes how the datasets are used by each model, and how the different models can be used together in an integrated way.
 
