@@ -1,5 +1,7 @@
 # Visibility
 
+## Overview
+
 The Visibility module provides tools to analyze line-of-sight connectivity between different infrastructure components. It determines whether points of interest (POIs) have clear line-of-sight with cell sites or with other POIs, accounting for terrain elevation, Earth's curvature, and antenna heights. Line-of-sight is required to establish the feasibility of radio links between points of interest (POIs) and cell sites using visibility analysis. The analysis uses open topography data from the [Shuttle Radar Topography Mission](https://www.earthdata.nasa.gov/data/instruments/srtm) (SRTM), which provides 30-meter resolution elevation data.
 
 _Figure: Visible cell site_
