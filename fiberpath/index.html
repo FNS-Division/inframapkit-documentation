@@ -44,6 +44,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../integrations/">Model integations</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../inputdata/">Input data</a>
                 </li>
               </ul>
@@ -70,6 +74,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#methods">Methods</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#outputs">Outputs</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#example">Example</a>
     </li>
     </ul>
@@ -80,7 +86,11 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../costmodel/">Cost model</a>
+                <li class="toctree-l1"><a class="reference internal" href="../costmodel/">Cost</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../assignment.md">Technology Assignment</a>
                 </li>
               </ul>
       </div>
@@ -365,6 +375,19 @@
 </tr>
 </tbody>
 </table>
+<h2 id="outputs">Outputs</h2>
+<p>The <code>get_results_table()</code> method produces a DataFrame with the following columns: </p>
+<ul>
+<li>closest_node_id </li>
+<li>closest_node_distance</li>
+<li>connected_node_id</li>
+<li>connected_node_distance</li>
+<li>fiber_path</li>
+<li>upstream_node_id</li>
+<li>upstream_node_distance</li>
+</ul>
+<p>These are summarized in the diagram below. In this example, the points of interest are schools.</p>
+<p><img alt="fiber-results" src="../img/fiberpath-output.png" /></p>
 <h2 id="example">Example</h2>
 <pre><code class="language-python">import pandas as pd
 from giga_inframapkit.entities.pointofinterest import PointOfInterestCollection

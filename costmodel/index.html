@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Cost model - giga-inframapkit</title>
+    <title>Cost - giga-inframapkit</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Cost model";
+        var mkdocs_page_name = "Cost";
         var mkdocs_page_input_path = "costmodel.md";
         var mkdocs_page_url = null;
       </script>
@@ -44,6 +44,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../integrations/">Model integations</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../inputdata/">Input data</a>
                 </li>
               </ul>
@@ -68,7 +72,7 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Cost model</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Cost</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
     </li>
@@ -95,6 +99,10 @@
     </ul>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../assignment.md">Technology Assignment</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -109,7 +117,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Cost model</li>
+      <li class="breadcrumb-item active">Cost</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -527,7 +535,7 @@
 </tr>
 </tbody>
 </table>
-<p>The cost calculation methods (<code>compute_fiber_costs</code>, <code>compute_p2area_costs</code>, <code>compute_p2p_costs</code>, <code>compute_satellite_costs</code>, <code>compute_electricity_costs</code>) each produce an output with the following keys:</p>
+<p>The cost calculation methods (<code>compute_fiber_costs</code>, <code>compute_p2area_costs</code>, <code>compute_p2p_costs</code>, <code>compute_satellite_costs</code>, <code>compute_electricity_costs</code>) each produce a <code>pd.DataFrame</code> output with the following keys:</p>
 <ul>
 <li><code>technology</code>: The technology type being analyzed (in this example "satellite", but could also be fiber, p2area, p2p, or electricity)</li>
 <li><code>number_poi</code>: Number of points of interest (POIs) included in this calculation</li>
@@ -542,7 +550,7 @@
 <li><code>init_capex</code>: Initial capital expenditure - the upfront investment required to deploy the technology</li>
 <li><code>annual_revenue</code>: Average annual revenue (calculated as total planning period revenue divided by number of years)</li>
 <li><code>annual_revenue_per_poi</code>: Average annual revenue per POI</li>
-<li><code>annual_cost</code>: Average annual cost (includes amortized CAPEX and annual OPEX)</li>
+<li><code>annual_cost</code>: Average annual cost (includes CAPEX and OPEX)</li>
 <li><code>annual_cost_per_poi</code>: Average annual cost per POI - a key metric for comparing the cost-effectiveness of different technologies</li>
 </ul>
 <p>The method <code>perform_analysis(poi_data)</code> should be provided with an input DataFrame with the following columns:</p>
