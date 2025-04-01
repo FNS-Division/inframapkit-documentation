@@ -128,7 +128,7 @@ The output is structured as a multi-indexed pandas DataFrame with the following 
 
 The `value` column contains the actual numerical results for each combination of indices.
 
-## Summary of cost models
+## Summary of Cost Models
 
 ### Fiber
 

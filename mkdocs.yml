@@ -1,4 +1,4 @@
-site_name: giga-inframapkit
+site_name: Connectivity Planning Platform Developer Documentation
 nav:
   - Home: index.md
   - Model Integration Framework: integrations.md
