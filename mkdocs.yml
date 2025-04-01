@@ -1,7 +1,7 @@
 site_name: giga-inframapkit
 nav:
   - Home: index.md
-  - Models Integration Framework: integrations.md
+  - Model Integration Framework: integrations.md
   - Input data: inputdata.md
   - Proximity: proximity.md
   - Coverage: coverage.md
