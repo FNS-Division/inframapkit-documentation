@@ -25,7 +25,7 @@ _Figure. Population counts around Points of Interest using non-overlapping buffe
 
 - **radii** (`list`, default=[1, 3, 5]): List of radii in kilometers for population analysis.
 - **radius_for_demand** (`int`, default=1): Specific radius used for traffic demand calculations.
-- **mbps_demand_per_user** (`int`, default=5): Bandwidth demand per user in Mbps.
+- **mbps_demand_per_user** (`int`, default=5): Throughput required per user in Mbps.
 - **overlap_allowed** (`bool`, default=False): Whether to allow POI catchment areas to overlap.
 - **logger** (`logging.Logger`, optional): Logger instance. Default created if None.
 
@@ -36,7 +36,7 @@ _Figure. Population counts around Points of Interest using non-overlapping buffe
 - **population_data**: Population dataset from the handler
 - **radii**: List of radii for analysis
 - **radius_for_demand**: Radius used for traffic calculations
-- **mbps_demand_per_user**: Bandwidth demand per user
+- **mbps_demand_per_user**: Throughput required demand per user
 - **overlap_allowed**: Boolean flag for catchment area overlap
 - **analysis_param**: Dictionary of analysis parameters
 - **analysis_stats**: Dictionary of analysis statistics

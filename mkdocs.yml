@@ -6,7 +6,7 @@ nav:
   - Proximity: proximity.md
   - Coverage: coverage.md
   - Demand: demand.md
-  - Fiber path: fiberpath.md
+  - Fiber Path: fiberpath.md
   - Visibility: visibility.md
   - Cost: costmodel.md
   - Technology Assignment: assignment.md

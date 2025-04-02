@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Coverage class analyzes telecommunication coverage for points of interest (POIs). It determines whether POIs have access to specific types of telecommunication coverage (2G, 3G, 4G, 5G, or satellite).
+The Coverage class analyzes mobile coverage for points of interest (POIs). It determines whether POIs are located in areas with mobile coverage (2G, 3G, 4G, 5G, or satellite).
 
 **Key features:**
 
@@ -23,11 +23,7 @@ The Coverage class analyzes telecommunication coverage for points of interest (P
 - **cell_sites** (`CellSiteCollection`, optional): Collection of cell sites. Required when method='cellsites' or 'buffer'.
 - **method** (`str`, default='map'): Analysis method to use:
     - 'map': Uses geographic coverage map polygons
-    - 'cellsites': Uses proximity to cell sites
     - 'buffer': Uses buffered areas around cell sites
-    - 'all_visible': Assumes all POIs have coverage
-    - 'no_visible': Assumes no POIs have coverage
-- **search_radius** (`int`, default=35): Distance in meters for cellsites method.
 - **buffer_distance** (`int`, optional): Buffer size in meters for buffer method.
 - **logger** (`logging.Logger`, optional): Logger instance. If None, a default logger is created.
 

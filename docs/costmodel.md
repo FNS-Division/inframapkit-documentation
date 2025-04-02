@@ -107,8 +107,8 @@ The cost calculation methods (`compute_fiber_costs`, `compute_p2area_costs`, `co
 The method `perform_analysis(poi_data)` should be provided with an input DataFrame with the following columns:
 
 - `poi_id`: unique identifier (UUID)
-- `total_mbps`: total throughput in Mbps for each POI (estimated using the Demand module of the toolkit)
-- `upstream_node_distance`: distance to the nearest transmission node (or connected POI) according the the FiberPath solution. This is the additional length of fiber required to connect the POI to the fiber network.
+- `total_mbps`: total throughput in Mbps for each POI (estimated using the `Demand` module of the toolkit)
+- `upstream_node_distance`: distance to the nearest transmission node (or connected POI) according the the `FiberPath` solution. This is the additional length of fiber required to connect the POI to the fiber network.
 - `has_electricity`: whether the POI is already electrified or not (`bool`).
 
 | poi_id | total_mbps | upstream_node_distance | has_electricity |
@@ -123,7 +123,7 @@ The output is structured as a multi-indexed pandas DataFrame with the following 
 
 - `poi_id`: Unique identifier for each point of interest
 - `pp`: Planning period (year number from 1 to the total project planning period)
-- `technology`: Technology type (fiber, p2area, p2p, satellite, electricity)
+- `technology`: Technology type (fiber, p2area, p2p, satellite and electricity)
 - `metric`: Cost metric (e.g., pp_profit, annual_cost_per_poi, pp_revenue, etc.)
 
 The `value` column contains the actual numerical results for each combination of indices.

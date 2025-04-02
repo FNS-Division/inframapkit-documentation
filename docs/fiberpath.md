@@ -23,7 +23,7 @@ _Figure: Output of fiber path algorithm_
 **Key features:**
 
 - Plans optimal fiber paths using road networks or direct line-of-sight connections
-- Supports clustering analysis for faster computations and regional planning
+- Supports clustering of points for faster computations and regional planning
 - Incorporates scale economies, allowing POIs to connect to other connected POIs
 - Optimizes based on physical distance or operator profits (thus findings the paths that connect all POIs, while maximizing the potential revenue by laying down fiber through the most populous zones)
 

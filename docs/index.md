@@ -18,4 +18,4 @@ This documentation serves as a guide to developers of the Connectivity Planning 
 
 This documentation is aimed at a technical audience, including those who will fine-tune models to suit their analysis needs and those who wish to contribute to the development of the platform.
 
-Many of the tools in this platform are inter-related. The outputs of some models are required to run dependent models. For an overview of the end-to-end analysis workflow and the model dependencies, start with the [Model Integration Framework](integrations.md).
+Many of the tools in this platform are inter-related. The outputs of some models are required to run dependent models. For an overview of the end-to-end analysis workflow and the model dependencies, start with the [Model Integration Framework](integrations.md) then read about the individual models.

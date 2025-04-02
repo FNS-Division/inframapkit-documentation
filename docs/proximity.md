@@ -2,13 +2,13 @@
 
 ## Overview
 
-The Proximity class calculates distances between points of interest (POIs) and telecommunications infrastructure elements. It performs spatial analysis to find the nearest cell sites and transmission nodes for each POI.
+The Proximity class calculates distances between Points of Interest (POIs) and telecommunications infrastructure elements. It performs distance calculations to find the nearest cell sites and transmission nodes for each POI.
 
 **Key features:**
 
 - Calculates distances to the nearest infrastructure elements by type (2G/3G/4G/5G cell sites, fiber nodes)
 - Uses Haversine formula to account for Earth's curvature in distance calculations
-- Efficiently processes large datasets using k-d trees for nearest-neighbor searches
+- Efficiently processes large datasets using kd trees for nearest-neighbor searches
 - Provides both raw distance data and summary statistics
 
 ## Class parameters
