@@ -33,7 +33,7 @@ _Figure: Output of fiber path algorithm_
 |-----------|------|---------|-------------|
 | points_of_interest | `PointOfInterestCollection` | Required | Collection of points of interest to be connected |
 | transmission_nodes | `TransmissionNodeCollection` | Required | Collection of transmission infrastructure nodes to connect to |
-| max_connection_distance | `int` | Required | Maximum connection distance in meters using the selected distance_metric |
+| max_connection_distance | `int` | Required | Maximum connection distance in meters using the selected `distance_metric` |
 | use_road_data | `bool` | Required | If True, use road networks; if False, use direct line-of-sight |
 | scale_economies | `bool` | `True` | If True, POIs can connect to other connected POIs; if False, POIs can only connect to transmission nodes |
 | n_clusters | `int` | `None` | Number of clusters for analysis. If None, clustering is based on distance. If 1, no clustering is performed |
