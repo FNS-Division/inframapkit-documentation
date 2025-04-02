@@ -59,15 +59,15 @@ In the case above, fiber is always the preferred option, followed by p2area, p2p
 
 ### Fiber
 
-The optimization problem has additional constraints related to fiber connectivity. These constraints are derived from the output of the `Fiber Path` model. In the example below, new fiber connections cannot be longer than 5km. Therefore, $POI_{B}$ cannot directly connect to nearest the transmission node because it is 6km away. However, $POI_{B}$ can become connected with fiber by connecting to nearby $POI_{A}$ - provided that $POI_{A}$ is also connected with fiber.
+The optimization problem has additional constraints related to fiber connectivity. These constraints are derived from the output of the `Fiber Path` model. In the example below, new fiber connections cannot be longer than 5km. Therefore, $$POI_{B}$$ cannot directly connect to nearest the transmission node because it is 6km away. However, $$POI_{B}$$ can become connected with fiber by connecting to nearby $$POI_{A}$$ - provided that $$POI_{A}$$ is also connected with fiber.
 
 _Figure. Fiber constraints._
 
 ![fiber-constraints](diagrams/fiber-constraints.drawio.svg)
 
-In this case, the decision variable $X_{(B, fiber)}$ can only be equal to 1 if $X_{(A, fiber)}$ is also equal to 1. This is expressed by adding a constraint to the model in the form of:
+In this case, the decision variable $$X_{(B, fiber)}$$ can only be equal to 1 if $$X_{(A, fiber)}$$ is also equal to 1. This is expressed by adding a constraint to the model in the form of:
 
-$X_{(B, fiber)} - X_{(B, fiber)} \cdot X_{(A, fiber)} \leq 0$
+$$X_{(B, fiber)} - X_{(B, fiber)} \cdot X_{(A, fiber)} \leq 0$$
 
 ### Point-to-point microwave
 
@@ -77,7 +77,7 @@ _Figure. P2P constraints._
 
 ![p2p-constraints](diagrams/p2p-constraints.drawio.svg)
 
-If a POI is not visible a cell site, it can still become connected with p2p if it is visible from another POI. However, if both a cell site and a POI are visible - the solver will favor the radio link to the cell site rather than to another POI. In the example below, $POI_{B}$ can connect using p2p only if $POI_{A}$ is also connected (with any technology).
+If a POI is not visible a cell site, it can still become connected with p2p if it is visible from another POI. However, if both a cell site and a POI are visible - the solver will favor the radio link to the cell site rather than to another POI. In the example below, $$POI_{B}$$ can connect using p2p only if $$POI_{A}$$ is also connected (with any technology).
 
 ## Class Parameters
 
