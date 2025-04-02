@@ -248,9 +248,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
+  <a href="#how-to-read-this-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Table of Contents
+      How to read this documentation?
     </span>
   </a>
   
@@ -498,9 +498,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
+  <a href="#how-to-read-this-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Table of Contents
+      How to read this documentation?
     </span>
   </a>
   
@@ -524,9 +524,20 @@
 
 <h1 id="connectivity-planning-platform-developer-documentation">Connectivity Planning Platform Developer Documentation</h1>
 <h2 id="background">Background</h2>
-<p>The Connectivity Planning Platform is a comprehensive suite of tools designed for the analysis and visualization of telecommunication infrastructure data. This platform offers a  set of models including data processing, mapping, visibility, fiber path and cost analyses - each engineered to address specific aspects of infrastructure analysis and planning. This documentation serves as a guide to developers of the Connectivity Planning Platform, providing insights into its functionality and application.</p>
-<h2 id="table-of-contents">Table of Contents</h2>
-<p>ABC</p>
+<p>The Connectivity Planning Platform is a suite of models designed for the analysis of telecommunication infrastructure data and to plan the connectivity of Points of Interest (POIs). The models hosted on this platform include:</p>
+<ul>
+<li><a href="proximity/">Proximity</a>: to assess the proximity of POIs to ICT infrastructure</li>
+<li><a href="coverage/">Coverage</a>: to assess the coverage status for POIs (including 3G, 4G, 5G)</li>
+<li><a href="demand/">Demand</a>: to estimate the number of internet users at each POI and the required throughput</li>
+<li><a href="visibility/">Visibility</a>: to assess the feasibility of point-to-point microwave links that require line-of-sight visibility</li>
+<li><a href="fiberpath/">Fiber Path</a>: to simulate the optimal fiber path connecting POIs to transmission nodes</li>
+<li><a href="costmodel/">Cost Model</a>: to evaluate the cost (capital and operational expenditures) of deploying connectivity solutions</li>
+<li><a href="assignment/">Technology Assignment</a>: to select the mix of technologies (among fiber, point-to-area, point-to-point and satellite) that maximize operator revenues, under budgetary and technological constraints</li>
+</ul>
+<p>This documentation serves as a guide to developers of the Connectivity Planning Platform, providing insights into its functionality and application.</p>
+<h2 id="how-to-read-this-documentation">How to read this documentation?</h2>
+<p>This documentation is aimed at a technical audience, including those who will fine-tune models to suit their analysis needs and those who wish to contribute to the development of the platform.</p>
+<p>Many of the tools in this platform are inter-related. The outputs of some models are required to run dependent models. For an overview of the end-to-end analysis workflow and the model dependencies, start with the <a href="integrations/">Model Integration Framework</a>.</p>
 
 
 

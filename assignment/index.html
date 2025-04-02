@@ -769,16 +769,15 @@
 <ul>
 <li>Determines the optimal mix of technologies for all unconnected POIs to maximize total operator profits.</li>
 <li>Connects all POIs when no maximum budget exists, or selectively connects POIs to maximize operator profits within budget constraints.</li>
-<li>Allows substitution of profit-related criteria with alternative considerations such as regulatory compliance or service quality.</li>
 </ul>
 <h2 id="dependencies">Dependencies</h2>
-<p>The <code>Technology Assignment</code> model has multiple dependencies, which are explained in the <a href="../integrations/">Model Integration Framework</a> page of this documentation and summarized below.</p>
+<p>The <code>Technology Assignment</code> model has multiple dependencies, which are explained in the <a href="../integrations/">Model Integration Framework</a> page of this documentation and also summarized below.</p>
 <ul>
 <li><strong>Fiber Path</strong>: The <code>Fiber Path</code> model determines which POIs can be connected to the fiber network given a constraint on the length of a fiber line. This determines which POIs it is feasible to connect with fiber. In short, POIs that are too far away from a transmission node cannot be connected with fiber.</li>
 <li><strong>Visibility</strong>: The <code>Visibility</code> model determines which POIs are visible from at least one cell site. Radio links using point-to-point microwave technology require visibility. Therefore, this model determines which POIs it is feasible to connect with this technology.</li>
 <li><strong>Coverage</strong>: The <code>Coverage</code> model assesses which POIs are located in an area with 3G, 4G or 5G coverage. If at least one of those cellular technologies are available, then it is feasible to connect those POIs using point-to-area technology.</li>
 </ul>
-<p>Moreover, the <code>Technology Assignment</code> model also requires the user to provide a <code>Cost</code> model. This is in order to: i) compare the deployment cost of different technologies and ii) report the cost associated with the final technology assignment solution. The <code>Cost</code> model itself also has its own model dependencies. First, it requires the output from the <code>Fiber Path</code> model to estimate the amount of fiber line and therefore fiber CAPEX cost for each POI. Second, it requires the <code>Demand</code> model which estimates the <code>total_mbps</code> metric, which is the total required throughput at each POI. This quantity is used to compute the revenues an operator can expect to recover at each POI.</p>
+<p>Moreover, the <code>Technology Assignment</code> model also requires the user to provide a <code>Cost</code> model. This is in order to: i) compare the deployment cost of different technologies and ii) report the cost associated with the final technology assignment solution. The <code>Cost</code> model itself also has its own model dependencies. First, it requires the output from the <code>Fiber Path</code> model to estimate the amount of fiber line and therefore fiber CAPEX cost for each POI. Second, it requires the <code>Demand</code> model which estimates the <code>total_mbps</code> metric, the total required throughput at each POI. This quantity is used to compute the revenues an operator can expect to recover at each POI.</p>
 <h2 id="technology-feasibility-criteria">Technology Feasibility Criteria</h2>
 <p>First, the <code>Technology Assignment</code> model assesses which technologies are feasible for each POI based on the criteria below.</p>
 <p><em>Table. Technology feasibility criteria.</em></p>
@@ -811,7 +810,7 @@
 <h2 id="optimization-problem">Optimization Problem</h2>
 <h3 id="defining-the-problem">Defining the Problem</h3>
 <p>The diagram below summarizes the optimization problem solved by the <code>Technology Assignment</code> model. This is a linear programming problem solved using the <a href="https://coin-or.github.io/Cbc/intro.html">CBC</a> solver and the <a href="https://coin-or.github.io/pulp/">PuLP</a> Python library.</p>
-<p>If there is no maximum budget, the solver maximizes the operator's total net revenue while connecting all POIs. If there is a maximum budget, the solver maximizes the operator's revenue while keeping the costs under the maximum budget. The operator revenues are derived using each POI's required throughpout (in mbps). POIs with a larger population living around them generate higher revenues for the operator (see <a href="../costmodel/">Cost Model</a>).</p>
+<p>If there is no maximum budget, the solver maximizes the operator's total net revenue while connecting all POIs. If there is a maximum budget, the solver maximizes the operator's revenue while keeping the costs under the maximum budget. The operator revenues are derived using each POI's required throughpout (in Mbps). POIs with more people living around them generate higher revenues for the operator (see <a href="../costmodel/">Cost Model</a>).</p>
 <p><em>Figure. Optimization problem.</em></p>
 <p><img alt="optimization" src="../diagrams/assignment.drawio.svg" /></p>
 <h3 id="special-case-user-defined-technology-ranking">Special Case: User-defined Technology Ranking</h3>
@@ -821,7 +820,7 @@
 <p>In the case above, fiber is always the preferred option, followed by p2area, p2p and satellite. As before, a technology can only be assigned to a POI if it is feasible. These preferences may be related to the quality, policies or regulations. If such a ranking is provided, the costs in the objective function default to zero for all technologies and the revenues are the values from this ranking dictionary. Therefore, the decision on which technology to select for a POI is no longer based on revenue but on those pre-specified preferences.</p>
 <h2 id="additional-constraints-related-to-technologies">Additional Constraints Related to Technologies</h2>
 <h3 id="fiber">Fiber</h3>
-<p>The optimization problem has additional constraints related to fiber connectivity. These constraints are derived from the output of the <code>Fiber Path</code> model. In the example below, new fiber connections cannot be longer than 5km. Therefore, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> cannot directly connect to nearest the transmission node because it is 6km away. However, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> can become connected with fiber by connecting to nearby <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> - provided that <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> is also connected with fiber.</p>
+<p>The optimization problem has additional constraints related to fiber connectivity. These constraints are derived from the output of the <code>Fiber Path</code> model. In the example below, new fiber connections cannot be longer than 5km. Therefore, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> cannot directly connect to nearest the transmission node because it is 6km away. However, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> can become connected with fiber by connecting to nearby <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> instead - provided that <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> is also connected with fiber.</p>
 <p><em>Figure. Fiber constraints.</em></p>
 <p><img alt="fiber-constraints" src="../diagrams/fiber-constraints.drawio.svg" /></p>
 <p>In this case, the decision variable <span class="arithmatex">\(<span class="arithmatex">\(X_{(B, fiber)}\)</span>\)</span> can only be equal to 1 if <span class="arithmatex">\(<span class="arithmatex">\(X_{(A, fiber)}\)</span>\)</span> is also equal to 1. This is expressed by adding a constraint to the model in the form of:</p>
@@ -830,12 +829,346 @@
 <p>The optimization problem also has additional constraints related to point-to-point microwave connectivity (p2p).</p>
 <p><em>Figure. P2P constraints.</em></p>
 <p><img alt="p2p-constraints" src="../diagrams/p2p-constraints.drawio.svg" /></p>
-<p>If a POI is not visible a cell site, it can still become connected with p2p if it is visible from another POI. However, if both a cell site and a POI are visible - the solver will favor the radio link to the cell site rather than to another POI. In the example below, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> can connect using p2p only if <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> is also connected (with any technology).</p>
+<p>If a POI is not visible a cell site, it can still become connected with p2p if it is visible from another POI. However, if both a cell site and a POI are visible - the solver will favour establishing a radio link to the cell site rather than to another POI. In the example below, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> can connect using p2p only if <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> is also connected (with any technology).</p>
 <h2 id="class-parameters">Class Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>used_technologies</td>
+<td><code>dict</code></td>
+<td>Required</td>
+<td>Specifies available technologies {'fiber', 'p2area', 'p2p', 'satellite': bool}</td>
+</tr>
+<tr>
+<td>poi_data</td>
+<td><code>pd.DataFrame</code></td>
+<td>Required</td>
+<td>Original POI data (incl. identifier, connection status, electricity availability)</td>
+</tr>
+<tr>
+<td>mapping_results</td>
+<td><code>pd.DataFrame</code></td>
+<td>Required</td>
+<td>Results from Proximity, Coverage and Demand models</td>
+</tr>
+<tr>
+<td>visibility_results</td>
+<td><code>pd.DataFrame</code></td>
+<td>Required</td>
+<td>Results from Visibilty model</td>
+</tr>
+<tr>
+<td>fiberpath_results</td>
+<td><code>pd.DataFrame</code></td>
+<td>Required</td>
+<td>Results from Fiber Path model</td>
+</tr>
+<tr>
+<td>primary_tech_params</td>
+<td><code>dict</code></td>
+<td>None</td>
+<td>Technology parameters for cost calculations (required if <code>cost_model</code> not provided)</td>
+</tr>
+<tr>
+<td>ranking_dictionary</td>
+<td><code>dict</code></td>
+<td>None</td>
+<td>User-defined  preferences for technology rankings {'fiber', 'p2area', 'p2p', 'satellite': int}</td>
+</tr>
+<tr>
+<td>max_fiber_dist_km_per_poi</td>
+<td><code>int</code></td>
+<td>None</td>
+<td>Maximum fiber connection distance per POI in km</td>
+</tr>
+<tr>
+<td>cost_model</td>
+<td><code>CostModel</code></td>
+<td>None</td>
+<td>Cost model for cost computations. If none is provided, <code>primary_tech_params</code> must be provided to create one.</td>
+</tr>
+<tr>
+<td>logger</td>
+<td><code>logging.Logger</code></td>
+<td>None</td>
+<td>Logger for output messages</td>
+</tr>
+</tbody>
+</table>
 <h2 id="class-attributes">Class Attributes</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>used_technologies</td>
+<td><code>dict</code></td>
+<td>Dictionary of technologies to be used in the analysis</td>
+</tr>
+<tr>
+<td>ranking_dictionary</td>
+<td><code>dict</code></td>
+<td>User-defined technology preference rankings</td>
+</tr>
+<tr>
+<td>poi_data</td>
+<td><code>pd.DataFrame</code></td>
+<td>Original POI data (incl. POI identifier, connection status, electricity availability)</td>
+</tr>
+<tr>
+<td>mapping_results</td>
+<td><code>pd.DataFrame</code></td>
+<td>Results from Proximity, Coverage and Demand models</td>
+</tr>
+<tr>
+<td>visibility_results</td>
+<td><code>pd.DataFrame</code></td>
+<td>Results from Visibilty model</td>
+</tr>
+<tr>
+<td>fiberpath_results</td>
+<td><code>pd.DataFrame</code></td>
+<td>Results from Fiber Path model</td>
+</tr>
+<tr>
+<td>fiberpath_results_filtered</td>
+<td><code>pd.DataFrame</code></td>
+<td>Filtered fiberpath_results table based on max distance</td>
+</tr>
+<tr>
+<td>visibility_results_filtered</td>
+<td><code>pd.DataFrame</code></td>
+<td>Filtered visibility_results table based on POI and cell site distance (order column)</td>
+</tr>
+<tr>
+<td>poi_inputs</td>
+<td><code>pd.DataFrame</code></td>
+<td>Merged dataset of all inputs for analysis</td>
+</tr>
+<tr>
+<td>cost_model</td>
+<td><code>CostModel</code></td>
+<td>Model for cost computations</td>
+</tr>
+<tr>
+<td>time_periods</td>
+<td><code>int</code></td>
+<td>Number of time periods for analysis</td>
+</tr>
+<tr>
+<td>max_fiber_dist_km_per_poi</td>
+<td><code>int</code></td>
+<td>Maximum fiber connection distance per POI in km</td>
+</tr>
+<tr>
+<td>assignment_solution_table</td>
+<td><code>pd.DataFrame</code></td>
+<td>Results of technology assignment analysis</td>
+</tr>
+<tr>
+<td>logger</td>
+<td><code>logging.Logger</code></td>
+<td>Logger for output messages</td>
+</tr>
+</tbody>
+</table>
 <h2 id="methods">Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>check_columns()</td>
+<td><code>None</code></td>
+<td>Verifies that all required columns are present in <code>poi_inputs</code></td>
+</tr>
+<tr>
+<td>check_feasibility()</td>
+<td><code>pd.DataFrame</code></td>
+<td>Evaluates technology feasibility for each POI</td>
+</tr>
+<tr>
+<td>get_fiber_dependencies()</td>
+<td><code>dict</code></td>
+<td>Retrieves the fiber path dependencies for each POI</td>
+</tr>
+<tr>
+<td>get_p2p_dependencies()</td>
+<td><code>dict</code></td>
+<td>Retrieves the P2P visibility dependencies for each POI</td>
+</tr>
+<tr>
+<td>perform_analysis(scenario="lowest_cost", schedule=True, max_budget=None)</td>
+<td><code>pd.DataFrame</code></td>
+<td>Assigns optimal technology to POIs based on cost or ranking</td>
+</tr>
+<tr>
+<td>clear_assignment_solution_table()</td>
+<td><code>None</code></td>
+<td>Clears the current assignment solution table</td>
+</tr>
+<tr>
+<td>compute_solution_cost(costmodel=None, only_unconnected_pois=False)</td>
+<td><code>pd.DataFrame</code></td>
+<td>Computes costs for assigned technologies. It is possible to provide a different Cost model than the one used for the technology assignment with <code>costmodel</code>, and <code>only_unconnected_pois</code> controls whether we report costs for all or only unconnected POIs</td>
+</tr>
+<tr>
+<td>_update_fiberpath_results_filtered()</td>
+<td><code>None</code></td>
+<td>Updates filtered fiber path results when max distance changes</td>
+</tr>
+<tr>
+<td>_filter_visibility_output()</td>
+<td><code>None</code></td>
+<td>Filters visibility results to include only first-order connections</td>
+</tr>
+<tr>
+<td>_update_poi_inputs()</td>
+<td><code>None</code></td>
+<td>Updates the merged POI input dataset</td>
+</tr>
+</tbody>
+</table>
 <h2 id="outputs">Outputs</h2>
 <h2 id="example">Example</h2>
+<pre><code class="language-python">import pandas as pd
+from giga_inframapkit.costmodel.costs import CostModel
+from giga_inframapkit.costmodel.techassignment import TechnologyAssigner
+
+# 1. Read required inputs
+
+    # POI data
+poi_df = pd.read_csv(&quot;input/points_of_interest.csv&quot;)
+poi_df.head()
+
+# poi_id    is_connected    lat lon has_electricity electricity_type
+# 0 23dd6a45-3656-435b-b3b1-c16efab9daeb    False   39.007771   1.561872    False   NaN
+# 1 e13a657c-edf0-4013-92db-6c70136e3ac9    False   38.906858   1.275420    False   NaN
+# 2 de75c87b-2676-47be-8454-4c44c4e6f644    False   38.993134   1.353725    False   NaN
+# 3 4267fc81-0e9f-40ca-84c8-84529958dc22    False   39.004266   1.525952    False   NaN
+# 4 ae0ccc6e-5f91-4a58-a60b-68e8ebcdc797    False   38.956769   1.323312    False   NaN
+
+    # Results from Proximity, Coverage, Demand models
+pcd_results_df = pd.read_json(&quot;input/pcd.json&quot;)
+pcd_results_df.head()
+
+#   poi_id  lat lon cell_site_dist  transmission_node_dist  population  poi_count   number_of_users total_mbps  coverage
+# 0 23dd6a45-3656-435b-b3b1-c16efab9daeb    39.007771   1.561872    {'any': 1158, '2G': 2365, '3G': 2475, '4G': 11...   {'any': 2559, 'fiber': 2559}    {'population_1km': 443, 'population_2km': 2885...   {'poi_count_1km': 1, 'poi_count_2km': 4, 'poi_...   443 2215    {'4G': True}
+
+    # Results from Visibility model
+visibility_results_df = pd.read_csv(&quot;input/visibility.csv&quot;)
+visibility_results_df.head()
+
+# poi_id    ict_id  radio_type  ground_distance antenna_los_distance    azimuth_angle   geometry    is_visible  num_visible order   visible_pois    is_visible_pois
+# 0 23dd6a45-3656-435b-b3b1-c16efab9daeb    f7412e93-8fb4-4abf-a298-8fb0876a97f5    4G  1502.0  1503.0  189.86  LINESTRING (1.561872175 39.00777101, 1.5588949...   True    1   1   ['4267fc81-0e9f-40ca-84c8-84529958dc22', '386b...   True
+# 1 e13a657c-edf0-4013-92db-6c70136e3ac9    8a4cfe6a-ce1a-4096-84dc-be09b32b8567    4G  4814.0  4825.0  143.54  LINESTRING (1.2754202 38.90685783, 1.308471633...   True    1   1   ['40a28229-3dbf-4f08-a516-3f46680a2e55', '8c09...   True
+
+    # Results from Fiber Path model
+fiberpath_results_df = pd.read_csv(&quot;input/fiberpath.csv&quot;)
+fiberpath_results_df.head()
+
+# poi_id    closest_node_id closest_node_distance   connected_node_id   connected_node_distance fiber_path  upstream_node_id    upstream_node_distance  cluster_id  max_dist_km in_mst_solution n_conns
+# 0 2b2ca058-e2b5-4ce2-a075-c3075f9027ef    c43ce78b-33f7-45b5-8763-ae7bca7fb995    3002.713    c43ce78b-33f7-45b5-8763-ae7bca7fb995    3002.713    ['c43ce78b-33f7-45b5-8763-ae7bca7fb995']    c43ce78b-33f7-45b5-8763-ae7bca7fb995    3002.713    1   50.0    True    1
+# 1 5a88dfd9-2448-4643-8446-ec81f79f236e    3555590c-de40-4e86-93df-8524dbc6c4c7    4240.552    541c5949-ab47-4a42-83df-2f5653718d5a    8397.644    ['541c5949-ab47-4a42-83df-2f5653718d5a', 'ba2f...   955bca73-4483-45af-ae38-adddd0751bf7    3318.664    1   50.0    True    3
+
+    # Microeconomic inputs (e.g. cost per km of fiber)
+cost_inputs_df = pd.read_csv(&quot;input/cost_inputs.csv&quot;)
+cost_inputs_df.head()
+
+#   Variable name   Value
+# 0 hw_setup_cost_fiber 500.0
+# 1 focl_constr_cost_fiber  8000.0
+# 2 reinv_period_fiber  5.0
+# 3 an_hw_maint_and_repl_fiber  0.1
+# 4 an_traffic_fees_one_mbps_fiber  12.0
+
+# 2. Specify which technologies can be considered
+
+used_technologies = {
+    'fiber': True,
+    'p2area': True,
+    'p2p': True,
+    'satellite': True
+}
+
+# 2. Create a TechnologyAssigner instance
+
+assigner = TechnologyAssigner(
+    used_technologies=used_technologies,
+    poi_data = poi_df,
+    mapping_results=pcd_results_df,
+    visibility_results=visibility_results_df,
+    fiberpath_results=fiberpath_results_df,
+    primary_tech_params=cost_inputs_df
+    )
+
+# 2025-04-02 10:35:26,717 - cost_ESP - INFO - A new cost model has been set up.
+# 2025-04-02 10:35:26,724 - cost_ESP - INFO - Time periods set to 10.
+
+# 3. Perform analysis without a maximum budget
+
+assigner.perform_analysis(
+    scenario=&quot;lowest_cost&quot;,
+    max_budget=None
+    )
+
+# 2025-04-02 10:36:30,892 - cost_ESP - INFO - Checking the feasibility of technologies...
+# 2025-04-02 10:36:30,974 - cost_ESP - INFO - Using the ranking scenario to assign technologies...
+# 2025-04-02 10:36:30,982 - cost_ESP - INFO - Setting up the optimization problem...
+# 2025-04-02 10:36:30,986 - cost_ESP - INFO - There are 100 POIs with at least one feasible technology.
+# 2025-04-02 10:36:30,996 - cost_ESP - INFO - Optimizer parameter 'schedule' is set to False, meaning that connections lasts either 10 or 0 periods.
+# 2025-04-02 10:36:31,005 - cost_ESP - INFO - Getting optimizer constraints related to fiber...
+# 2025-04-02 10:36:31,009 - cost_ESP - INFO - Getting optimizer constraints related to P2P...
+# 2025-04-02 10:36:31,011 - cost_ESP - INFO - Optimizing the NPV and connecting all POIs without a maximum budget...
+# 2025-04-02 10:36:31,012 - cost_ESP - INFO - Number of optimizer variables: 433
+# 2025-04-02 10:36:31,013 - cost_ESP - INFO - Number of optimizer constraints: 601
+# 2025-04-02 10:36:31,013 - cost_ESP - INFO - Starting optimization...
+# 2025-04-02 10:36:32,430 - cost_ESP - INFO - Solution Status: 1, Optimal
+# 2025-04-02 10:36:32,443 - cost_ESP - INFO - No POIs connected with p2p in time period 0, skipping path constraint check.
+
+# Welcome to the CBC MILP Solver 
+# Version: 2.10.3 
+# Build Date: Dec 15 2019 
+
+# Result - Optimal solution found
+
+# Objective value:                4000.00000000
+# Enumerated nodes:               0
+# Total iterations:               0
+# Time (CPU seconds):             0.01
+# Time (Wallclock seconds):       0.02
+
+# Option for printingOptions changed from normal to all
+# Total time (CPU seconds):       0.01   (Wallclock seconds):       0.03
+
+# 4. Perform analysis without a maximum budget, only report costs for unconnected POIs
+
+cost_solution = assigner.compute_solution_cost(only_unconnected_pois=True)
+cost_solution.head()
+
+#                                   annual_cost annual_cost_per_poi annual_revenue  annual_revenue_per_poi  init_capex  pp_coo  pp_coo_per_poi  pp_profit   pp_profit_per_poi   pp_revenue  pp_revenue_per_poi  first_connected_period  number_of_periods
+# poi_id    pp  max_dist_km technology  is_connected    lat lon upstream_node_distance  bound                                                   
+# 005e4a38-ee50-41b2-a7ba-fd8fd86c5179  10  50  fiber   False   38.930953   1.286008    2762.078    central 5111.3  5111.3  13200.0 13200.0 24806.3 51112.6 51112.6 80887.4 80887.4 132000.0    132000.0    0   10
+# 019d2f45-228e-4943-b302-1af7cb2ae820  10  50  fiber   False   38.942632   1.238764    3284.765    central 6031.2  6031.2  57240.0 57240.0 29405.9 60311.9 60311.9 512088.1    512088.1    572400.0    572400.0    0   10
+</code></pre>
 
 
 

@@ -596,7 +596,7 @@
 
 
 
-<h1 id="fiber-path">Fiber path</h1>
+<h1 id="fiber-path">Fiber Path</h1>
 <h2 id="overview">Overview</h2>
 <p>The fiber path model identifies the shortest and most cost-effective paths for connecting unconnected points of interest (POIs) to the existing optical fiber network using the road network. By minimizing the total length of fiber required, this model reduces overall deployment costs while efficiently extending connectivity.</p>
 <p>To start with, the model connects POIs and fiber nodes to the existing road network using straight lines (unless they are already on the road network). Then, for each unconnected POI, it computes the shortest path to all fiber nodes. POIs that are already connected to the fiber network can also act as fiber nodes, from which the fiber network can be extended.</p>
@@ -887,7 +887,7 @@ transmission_node_collection.load_from_records(transmission_node_df.to_dict('rec
 # PointOfInterestCollection: 100 entities
 # TransmissionNodeCollection: 30 entities
 
-# 2. Create a FiberPath analysis instance
+# 2. Create a FiberPath instance
 
 fiberpath = FiberPath(
     points_of_interest = poi_collection, 
