@@ -1,4 +1,4 @@
-# Fiber path
+# Fiber Path
 
 ## Overview
 
@@ -117,7 +117,7 @@ transmission_node_collection.load_from_records(transmission_node_df.to_dict('rec
 # PointOfInterestCollection: 100 entities
 # TransmissionNodeCollection: 30 entities
 
-# 2. Create a FiberPath analysis instance
+# 2. Create a FiberPath instance
 
 fiberpath = FiberPath(
     points_of_interest = poi_collection, 
