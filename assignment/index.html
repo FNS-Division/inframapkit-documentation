@@ -326,7 +326,7 @@
   
   
   <span class="md-ellipsis">
-    Fiber path
+    Fiber Path
     
   </span>
   
@@ -820,16 +820,16 @@
 <p>In the case above, fiber is always the preferred option, followed by p2area, p2p and satellite. As before, a technology can only be assigned to a POI if it is feasible. These preferences may be related to the quality, policies or regulations. If such a ranking is provided, the costs in the objective function default to zero for all technologies and the revenues are the values from this ranking dictionary. Therefore, the decision on which technology to select for a POI is no longer based on revenue but on those pre-specified preferences.</p>
 <h2 id="additional-constraints-related-to-technologies">Additional Constraints Related to Technologies</h2>
 <h3 id="fiber">Fiber</h3>
-<p>The optimization problem has additional constraints related to fiber connectivity. These constraints are derived from the output of the <code>Fiber Path</code> model. In the example below, new fiber connections cannot be longer than 5km. Therefore, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> cannot directly connect to nearest the transmission node because it is 6km away. However, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> can become connected with fiber by connecting to nearby <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> instead - provided that <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> is also connected with fiber.</p>
+<p>The optimization problem has additional constraints related to fiber connectivity. These constraints are derived from the output of the <code>Fiber Path</code> model. In the example below, new fiber connections cannot be longer than 5 km. Therefore, <span class="arithmatex">\(POI_{B}\)</span> cannot directly connect to the nearest transmission node because it is 6 km away. However, <span class="arithmatex">\(POI_{B}\)</span> can become connected with fiber by connecting to nearby <span class="arithmatex">\(POI_{A}\)</span> instead - provided that <span class="arithmatex">\(POI_{A}\)</span> is also connected with fiber.</p>
 <p><em>Figure. Fiber constraints.</em></p>
 <p><img alt="fiber-constraints" src="../diagrams/fiber-constraints.drawio.svg" /></p>
-<p>In this case, the decision variable <span class="arithmatex">\(<span class="arithmatex">\(X_{(B, fiber)}\)</span>\)</span> can only be equal to 1 if <span class="arithmatex">\(<span class="arithmatex">\(X_{(A, fiber)}\)</span>\)</span> is also equal to 1. This is expressed by adding a constraint to the model in the form of:</p>
-<div class="arithmatex">\[X_{(B, fiber)} - X_{(B, fiber)} \cdot X_{(A, fiber)} \leq 0\]</div>
+<p>In this case, the decision variable <span class="arithmatex">\(X_{B, fiber}\)</span> can only be equal to 1 if <span class="arithmatex">\(X_{A, fiber}\)</span> is also equal to 1. This is expressed by adding a constraint to the model in the form of:</p>
+<div class="arithmatex">\[X_{B, fiber} - X_{B, fiber} \cdot X_{A, fiber} \leq 0\]</div>
 <h3 id="point-to-point-microwave">Point-to-point microwave</h3>
 <p>The optimization problem also has additional constraints related to point-to-point microwave connectivity (p2p).</p>
 <p><em>Figure. P2P constraints.</em></p>
 <p><img alt="p2p-constraints" src="../diagrams/p2p-constraints.drawio.svg" /></p>
-<p>If a POI is not visible a cell site, it can still become connected with p2p if it is visible from another POI. However, if both a cell site and a POI are visible - the solver will favour establishing a radio link to the cell site rather than to another POI. In the example below, <span class="arithmatex">\(<span class="arithmatex">\(POI_{B}\)</span>\)</span> can connect using p2p only if <span class="arithmatex">\(<span class="arithmatex">\(POI_{A}\)</span>\)</span> is also connected (with any technology).</p>
+<p>If a POI is not visible a cell site, it can still become connected with p2p if it is visible from another POI. However, if both a cell site and a POI are visible - the solver will favour establishing a radio link to the cell site rather than to another POI. In the example below, <span class="arithmatex">\(POI_{B}\)</span> can connect using p2p only if <span class="arithmatex">\(POI_{A}\)</span> is also connected (with any technology).</p>
 <h2 id="class-parameters">Class Parameters</h2>
 <table>
 <thead>

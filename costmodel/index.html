@@ -328,7 +328,7 @@
   
   
   <span class="md-ellipsis">
-    Fiber path
+    Fiber Path
     
   </span>
   
@@ -1110,8 +1110,8 @@
 <p>The method <code>perform_analysis(poi_data)</code> should be provided with an input DataFrame with the following columns:</p>
 <ul>
 <li><code>poi_id</code>: unique identifier (UUID)</li>
-<li><code>total_mbps</code>: total throughput in Mbps for each POI (estimated using the Demand module of the toolkit)</li>
-<li><code>upstream_node_distance</code>: distance to the nearest transmission node (or connected POI) according the the FiberPath solution. This is the additional length of fiber required to connect the POI to the fiber network.</li>
+<li><code>total_mbps</code>: total throughput in Mbps for each POI (estimated using the <code>Demand</code> module of the toolkit)</li>
+<li><code>upstream_node_distance</code>: distance to the nearest transmission node (or connected POI) according the the <code>FiberPath</code> solution. This is the additional length of fiber required to connect the POI to the fiber network.</li>
 <li><code>has_electricity</code>: whether the POI is already electrified or not (<code>bool</code>).</li>
 </ul>
 <table>
@@ -1160,7 +1160,7 @@
 <ul>
 <li><code>poi_id</code>: Unique identifier for each point of interest</li>
 <li><code>pp</code>: Planning period (year number from 1 to the total project planning period)</li>
-<li><code>technology</code>: Technology type (fiber, p2area, p2p, satellite, electricity)</li>
+<li><code>technology</code>: Technology type (fiber, p2area, p2p, satellite and electricity)</li>
 <li><code>metric</code>: Cost metric (e.g., pp_profit, annual_cost_per_poi, pp_revenue, etc.)</li>
 </ul>
 <p>The <code>value</code> column contains the actual numerical results for each combination of indices.</p>

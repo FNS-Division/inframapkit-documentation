@@ -439,7 +439,7 @@
   
   
   <span class="md-ellipsis">
-    Fiber path
+    Fiber Path
     
   </span>
   
@@ -628,7 +628,7 @@
 
 <h1 id="coverage">Coverage</h1>
 <h2 id="overview">Overview</h2>
-<p>The Coverage class analyzes telecommunication coverage for points of interest (POIs). It determines whether POIs have access to specific types of telecommunication coverage (2G, 3G, 4G, 5G, or satellite).</p>
+<p>The Coverage class analyzes mobile coverage for points of interest (POIs). It determines whether POIs are located in areas with mobile coverage (2G, 3G, 4G, 5G, or satellite).</p>
 <p><strong>Key features:</strong></p>
 <ul>
 <li>Supports multiple analysis methods including coverage maps, proximity to cell sites, and buffer zones</li>
@@ -647,13 +647,9 @@
 <li><strong>cell_sites</strong> (<code>CellSiteCollection</code>, optional): Collection of cell sites. Required when method='cellsites' or 'buffer'.</li>
 <li><strong>method</strong> (<code>str</code>, default='map'): Analysis method to use:<ul>
 <li>'map': Uses geographic coverage map polygons</li>
-<li>'cellsites': Uses proximity to cell sites</li>
 <li>'buffer': Uses buffered areas around cell sites</li>
-<li>'all_visible': Assumes all POIs have coverage</li>
-<li>'no_visible': Assumes no POIs have coverage</li>
 </ul>
 </li>
-<li><strong>search_radius</strong> (<code>int</code>, default=35): Distance in meters for cellsites method.</li>
 <li><strong>buffer_distance</strong> (<code>int</code>, optional): Buffer size in meters for buffer method.</li>
 <li><strong>logger</strong> (<code>logging.Logger</code>, optional): Logger instance. If None, a default logger is created.</li>
 </ul>
