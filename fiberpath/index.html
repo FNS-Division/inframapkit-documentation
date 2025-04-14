@@ -605,7 +605,7 @@
 <p>At each step of the algorithm, new connections are made between connected and unconnected points as long as the length of the new connection is below a specified threshold. For example, it can be specified that no single fiber line should be longer than 5 kilometers.</p>
 <p>This approach enables economies of scale: POIs can act as relay points for neighboring POIs, enabling connectivity without each one needing to connect directly to a transmission node. This approach optimizes resource usage and simplifies network expansion.</p>
 <p>In practice, this model is an application of <a href="https://en.wikipedia.org/wiki/Kruskal%27s_algorithm">Kruskal's algorithm</a> to find a Minimum Spanning Tree (MST) in a network graph, where the edges are the road network and the vertices are POIs and fiber nodes. The MST ensures the minimal fiber path necessary to connect all relevant points while adhering to road network constraints related to distance.</p>
-<p><em>Figure: Output of fiber path algorithm</em></p>
+<p><em>Figure: Output of Fiber Path algorithm</em></p>
 <p><img alt="nam-fiber-lines" src="../img/nam-fiber-lines.png" /></p>
 <p><strong>Key features:</strong></p>
 <ul>
@@ -907,8 +907,6 @@ fiberpath = FiberPath(
 fiberpath.perform_analysis()
 
 # INFO:fiberpath_ESP:Running analysis without clustering...
-# INFO:fiberpath_ESP:Processing population tif file...
-# INFO:fiberpath_ESP:Population tif file is processed!
 # INFO:fiberpath_ESP:Dynamically connecting points of interest...
 # Generating contraction hierarchies with 8 threads.
 # Setting CH node vector of size 35771
