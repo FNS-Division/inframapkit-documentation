@@ -16,6 +16,7 @@ This page summarizes the data user-provided required by the toolkit. The provide
 | country_code | string | | DZA | Yes | ISO 3166-1 alpha-3 country code |
 | is_connected | boolean | | True | Yes | Whether the POI has connectivity |
 | connectivity_type | string | | fiber | Yes | Type of internet connectivity |
+| has_electricity | boolean | | True | Yes | Whether the POI has electricity |
 
 ## Cell sites
 
@@ -27,7 +28,7 @@ This page summarizes the data user-provided required by the toolkit. The provide
 | longitude | float | | 1.401938 | Yes | Cell tower geographical longitude |
 | operator_name | string | | TelOperator | No | Mobile network operator name |
 | radio_type | string | 2G, 3G, 4G, 5G | 4G | Yes | Type of radio transmission technology |
-| antenna_height_m | float | | 25 | Yes | Antenna height on the tower or building |
+| antenna_height | float | | 25 | Yes | Antenna height on the tower or building |
 | backhaul_type | string | fiber, microwave, satellite | fiber | No | Type of backhaul connectivity of the cell tower |
 | backhaul_throughput_mbps | float | | 1000 | No | Equipped throughput of the backhaul |
 
@@ -40,7 +41,7 @@ This page summarizes the data user-provided required by the toolkit. The provide
 | latitude | float | | 38.988755 | Yes | Geographical latitude |
 | longitude | float | | 1.401938 | Yes | Geographical longitude |
 | operator_name | string | | TelOperator | No | Name of the mobile operator |
-| infrastructure_type | string | fiber, microwave, other | fiber | Yes | Type of Infrastructure |
+| transmission_medium | string | fiber, microwave, other | fiber | Yes | Transmission medium |
 | node_status | string | operational, planned, under construction | operational | Yes | Status of the node |
 | equipped_capacity_mbps | float | | 1000 | No | Equipped bandwidth ready for use to connect subscribers |
 | potential_capacity_mbps | float | | 2000 | No | Total theoretical bandwidth available for subscriber connections |

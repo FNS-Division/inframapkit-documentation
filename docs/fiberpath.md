@@ -16,7 +16,7 @@ This approach enables economies of scale: POIs can act as relay points for neigh
 
 In practice, this model is an application of [Kruskal's algorithm](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm) to find a Minimum Spanning Tree (MST) in a network graph, where the edges are the road network and the vertices are POIs and fiber nodes. The MST ensures the minimal fiber path necessary to connect all relevant points while adhering to road network constraints related to distance.
 
-_Figure: Output of fiber path algorithm_
+_Figure: Output of Fiber Path algorithm_
 
 ![nam-fiber-lines](img/nam-fiber-lines.png)
 
@@ -137,8 +137,6 @@ fiberpath = FiberPath(
 fiberpath.perform_analysis()
 
 # INFO:fiberpath_ESP:Running analysis without clustering...
-# INFO:fiberpath_ESP:Processing population tif file...
-# INFO:fiberpath_ESP:Population tif file is processed!
 # INFO:fiberpath_ESP:Dynamically connecting points of interest...
 # Generating contraction hierarchies with 8 threads.
 # Setting CH node vector of size 35771
