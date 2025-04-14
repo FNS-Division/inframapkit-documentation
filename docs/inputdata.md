@@ -28,7 +28,7 @@ This page summarizes the data user-provided required by the toolkit. The provide
 | longitude | float | | 1.401938 | Yes | Cell tower geographical longitude |
 | operator_name | string | | TelOperator | No | Mobile network operator name |
 | radio_type | string | 2G, 3G, 4G, 5G | 4G | Yes | Type of radio transmission technology |
-| antenna_height | float | | 25 | Yes | Antenna height on the tower or building |
+| antenna_height | float | | 25 | Yes | Antenna height in meters from the ground |
 | backhaul_type | string | fiber, microwave, satellite | fiber | No | Type of backhaul connectivity of the cell tower |
 | backhaul_throughput_mbps | float | | 1000 | No | Equipped throughput of the backhaul |
 
