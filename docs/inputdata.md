@@ -15,7 +15,7 @@ This page summarizes the data user-provided required by the toolkit. The provide
 | poi_subtype | string | | primary school | No | Specific subtype of the POI |
 | country_code | string | | DZA | Yes | ISO 3166-1 alpha-3 country code |
 | is_connected | boolean | | True | Yes | Whether the POI has connectivity |
-| connectivity_type | string | | fiber | Yes | Type of internet connectivity |
+| connectivity_type | string | unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired | fiber | Yes | Type of internet connectivity |
 | has_electricity | boolean | | True | Yes | Whether the POI has electricity |
 
 ## Cell sites
@@ -51,5 +51,6 @@ This page summarizes the data user-provided required by the toolkit. The provide
 | Column name | Column type | Levels | Example | Mandatory | Definition |
 |------------|-------------|---------|----------|-----------|------------|
 | fid | str | | 123e4567-e89b-12d3-a456-426614174000 | Yes | Unique identifier for polygons |
+| radio_type | str | 2G, 3G, 4G, 5G | 4G | Yes | Radio technology type |
 | coverage | int | | 1 | Yes | Should be equal to 1 for all rows |
 | geometry | geometry | | POLYGON((-74.0060 40.7128, -73.9857 40.7484, -73.9772 40.7516, -74.0060 40.7128)) | Yes | Mobile coverage polygons |
