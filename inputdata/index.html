@@ -608,30 +608,6 @@
 <td>Longitude coordinate</td>
 </tr>
 <tr>
-<td>poi_type</td>
-<td>string</td>
-<td></td>
-<td>school</td>
-<td>No</td>
-<td>Type of point of interest</td>
-</tr>
-<tr>
-<td>is_public</td>
-<td>boolean</td>
-<td></td>
-<td>True</td>
-<td>No</td>
-<td>Whether the POI is public or private</td>
-</tr>
-<tr>
-<td>poi_subtype</td>
-<td>string</td>
-<td></td>
-<td>primary school</td>
-<td>No</td>
-<td>Specific subtype of the POI</td>
-</tr>
-<tr>
 <td>country_code</td>
 <td>string</td>
 <td></td>
@@ -662,6 +638,30 @@
 <td>True</td>
 <td>Yes</td>
 <td>Whether the POI has electricity</td>
+</tr>
+<tr>
+<td>poi_type</td>
+<td>string</td>
+<td></td>
+<td>school</td>
+<td>No</td>
+<td>Type of point of interest</td>
+</tr>
+<tr>
+<td>is_public</td>
+<td>boolean</td>
+<td></td>
+<td>True</td>
+<td>No</td>
+<td>Whether the POI is public or private</td>
+</tr>
+<tr>
+<td>poi_subtype</td>
+<td>string</td>
+<td></td>
+<td>primary school</td>
+<td>No</td>
+<td>Specific subtype of the POI</td>
 </tr>
 </tbody>
 </table>
@@ -711,14 +711,6 @@
 <td>Cell tower geographical longitude</td>
 </tr>
 <tr>
-<td>operator_name</td>
-<td>string</td>
-<td></td>
-<td>TelOperator</td>
-<td>No</td>
-<td>Mobile network operator name</td>
-</tr>
-<tr>
 <td>radio_type</td>
 <td>string</td>
 <td>2G, 3G, 4G, 5G</td>
@@ -733,6 +725,14 @@
 <td>25</td>
 <td>Yes</td>
 <td>Antenna height in meters from the ground</td>
+</tr>
+<tr>
+<td>operator_name</td>
+<td>string</td>
+<td></td>
+<td>TelOperator</td>
+<td>No</td>
+<td>Mobile network operator name</td>
 </tr>
 <tr>
 <td>backhaul_type</td>
@@ -798,14 +798,6 @@
 <td>Geographical longitude</td>
 </tr>
 <tr>
-<td>operator_name</td>
-<td>string</td>
-<td></td>
-<td>TelOperator</td>
-<td>No</td>
-<td>Name of the mobile operator</td>
-</tr>
-<tr>
 <td>transmission_medium</td>
 <td>string</td>
 <td>fiber, microwave, other</td>
@@ -820,6 +812,14 @@
 <td>operational</td>
 <td>Yes</td>
 <td>Status of the node</td>
+</tr>
+<tr>
+<td>operator_name</td>
+<td>string</td>
+<td></td>
+<td>TelOperator</td>
+<td>No</td>
+<td>Name of the mobile operator</td>
 </tr>
 <tr>
 <td>equipped_capacity_mbps</td>
@@ -853,12 +853,12 @@
 </thead>
 <tbody>
 <tr>
-<td>fid</td>
-<td>str</td>
+<td>geometry</td>
+<td>geometry</td>
 <td></td>
-<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>POLYGON((-74.0060 40.7128, -73.9857 40.7484, -73.9772 40.7516, -74.0060 40.7128))</td>
 <td>Yes</td>
-<td>Unique identifier for polygons</td>
+<td>Mobile coverage polygons</td>
 </tr>
 <tr>
 <td>radio_type</td>
@@ -869,20 +869,12 @@
 <td>Radio technology type</td>
 </tr>
 <tr>
-<td>coverage</td>
-<td>int</td>
+<td>fid</td>
+<td>str</td>
 <td></td>
-<td>1</td>
-<td>Yes</td>
-<td>Should be equal to 1 for all rows</td>
-</tr>
-<tr>
-<td>geometry</td>
-<td>geometry</td>
-<td></td>
-<td>POLYGON((-74.0060 40.7128, -73.9857 40.7484, -73.9772 40.7516, -74.0060 40.7128))</td>
-<td>Yes</td>
-<td>Mobile coverage polygons</td>
+<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>No</td>
+<td>Unique identifier for polygons</td>
 </tr>
 </tbody>
 </table>
