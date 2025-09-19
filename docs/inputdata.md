@@ -14,6 +14,7 @@ This page summarizes the data user-provided required by the toolkit. The provide
 | is_connected | boolean | | True | Yes | Whether the POI has connectivity |
 | connectivity_type | string | unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired | fiber | Yes | Type of internet connectivity |
 | has_electricity | boolean | | True | Yes | Whether the POI has electricity |
+| number_of_users | boolean | | True | No | Peak number of internet user at the POI |
 | poi_type | string | | school | No | Type of point of interest |
 | is_public | boolean | | True | No | Whether the POI is public or private |
 | poi_subtype | string | | primary school | No | Specific subtype of the POI |
