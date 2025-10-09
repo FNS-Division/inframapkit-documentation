@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../integrations/">
+        <link rel="prev" href="../assignment/">
       
-      
-        <link rel="next" href="../proximity/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Input data - Connectivity Planning Platform Developer Documentation</title>
+        <title>Results Metadata - Connectivity Planning Platform Developer Documentation</title>
       
     
     
@@ -62,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#datasets" class="md-skip">
+        <a href="#point-level-results" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Input data
+              Results Metadata
             
           </span>
         </div>
@@ -235,32 +233,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Input data
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../inputdata/" class="md-nav__link">
         
   
   
@@ -271,62 +247,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#points-of-interest-poi" class="md-nav__link">
-    <span class="md-ellipsis">
-      Points of interest (POI)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cell-sites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cell sites
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transmission-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transmission nodes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mobile-coverage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mobile coverage
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -489,10 +409,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../results/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Results Metadata
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -503,6 +445,35 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#output-file-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output File Metadata
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -534,36 +505,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#points-of-interest-poi" class="md-nav__link">
+  <a href="#output-file-metadata" class="md-nav__link">
     <span class="md-ellipsis">
-      Points of interest (POI)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cell-sites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cell sites
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transmission-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transmission nodes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mobile-coverage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mobile coverage
+      Output File Metadata
     </span>
   </a>
   
@@ -585,329 +529,465 @@
 
 
 
-<h1 id="datasets">Datasets</h1>
-<p>This page summarizes the data user-provided required by the toolkit. The provided data must conform to the standards below.</p>
-<h2 id="points-of-interest-poi">Points of interest (POI)</h2>
+<h1 id="point-level-results">Point-level results</h1>
+<p><img alt="Points visualization" src="../img/results-points.png" /></p>
+<h2 id="output-file-metadata">Output File Metadata</h2>
 <table>
 <thead>
 <tr>
-<th>Column name</th>
-<th>Column type</th>
-<th>Levels</th>
-<th>Example</th>
-<th>Mandatory</th>
-<th>Definition</th>
+<th>Analysis Source</th>
+<th>Indicator</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>poi_id</td>
-<td>UUID</td>
-<td></td>
-<td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>Yes</td>
-<td>Unique identifier for the POI</td>
+<td><strong>Input POI data</strong></td>
+<td><code>dataset_id</code></td>
+<td>Identifier for the source dataset containing this POI</td>
 </tr>
 <tr>
-<td>dataset_id</td>
-<td>UUID</td>
 <td></td>
-<td>987fcdeb-51a2-12d3-a456-426614174000</td>
-<td>Yes</td>
-<td>Unique identifier for the dataset</td>
+<td><code>geometry</code></td>
+<td>Geometric representation of POI location (point coordinates)</td>
 </tr>
 <tr>
-<td>lat</td>
-<td>float</td>
 <td></td>
-<td>36.7538</td>
-<td>Yes</td>
-<td>Latitude coordinate</td>
+<td><code>lat</code></td>
+<td>Latitude coordinate of the POI location</td>
 </tr>
 <tr>
-<td>lon</td>
-<td>float</td>
 <td></td>
-<td>3.0588</td>
-<td>Yes</td>
-<td>Longitude coordinate</td>
+<td><code>lon</code></td>
+<td>Longitude coordinate of the POI location</td>
 </tr>
 <tr>
-<td>country_code</td>
-<td>string</td>
 <td></td>
-<td>DZA</td>
-<td>Yes</td>
-<td>ISO 3166-1 alpha-3 country code</td>
+<td><code>poi_id</code></td>
+<td>Unique identifier for each Point of Interest (POI)</td>
 </tr>
 <tr>
-<td>is_connected</td>
-<td>boolean</td>
 <td></td>
-<td>True</td>
-<td>Yes</td>
-<td>Whether the POI has connectivity</td>
+<td><code>poi_type</code></td>
+<td>Category/type of POI (e.g. school, health center, town hall)</td>
 </tr>
 <tr>
-<td>connectivity_type</td>
-<td>string</td>
-<td>unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired</td>
-<td>fiber</td>
-<td>Yes</td>
-<td>Type of internet connectivity</td>
+<td><strong>Proximity</strong></td>
+<td><code>2g_cell_site_dist</code></td>
+<td>Distance in meters to nearest 2G cell site</td>
 </tr>
 <tr>
-<td>has_electricity</td>
-<td>boolean</td>
 <td></td>
-<td>True</td>
-<td>Yes</td>
-<td>Whether the POI has electricity</td>
+<td><code>3g_cell_site_dist</code></td>
+<td>Distance in meters to nearest 3G cell site</td>
 </tr>
 <tr>
-<td>number_of_users</td>
-<td>boolean</td>
 <td></td>
-<td>True</td>
-<td>No</td>
-<td>Peak number of internet user at the POI</td>
+<td><code>4g_cell_site_dist</code></td>
+<td>Distance in meters to nearest 4G cell site</td>
 </tr>
 <tr>
-<td>poi_type</td>
-<td>string</td>
 <td></td>
-<td>school</td>
-<td>No</td>
-<td>Type of point of interest</td>
+<td><code>5g_cell_site_dist</code></td>
+<td>Distance in meters to nearest 5G cell site</td>
 </tr>
 <tr>
-<td>is_public</td>
-<td>boolean</td>
 <td></td>
-<td>True</td>
-<td>No</td>
-<td>Whether the POI is public or private</td>
+<td><code>cell_site_dist</code></td>
+<td>Distance in meters to nearest cellular tower (any generation)</td>
 </tr>
 <tr>
-<td>poi_subtype</td>
-<td>string</td>
 <td></td>
-<td>primary school</td>
-<td>No</td>
-<td>Specific subtype of the POI</td>
+<td><code>fiber_node_dist</code></td>
+<td>Distance in meters to nearest fiber optic network node</td>
+</tr>
+<tr>
+<td></td>
+<td><code>transmission_node_dist</code></td>
+<td>Distance in meters to nearest transmission infrastructure node</td>
+</tr>
+<tr>
+<td><strong>Coverage</strong></td>
+<td><code>2g_mobile_coverage</code></td>
+<td>Boolean indicating if POI has 2G mobile network coverage</td>
+</tr>
+<tr>
+<td></td>
+<td><code>3g_mobile_coverage</code></td>
+<td>Boolean indicating if POI has 3G mobile network coverage</td>
+</tr>
+<tr>
+<td></td>
+<td><code>4g_mobile_coverage</code></td>
+<td>Boolean indicating if POI has 4G mobile network coverage</td>
+</tr>
+<tr>
+<td></td>
+<td><code>5g_mobile_coverage</code></td>
+<td>Boolean indicating if POI has 5G mobile network coverage</td>
+</tr>
+<tr>
+<td><strong>Demand</strong></td>
+<td><code>mbps_demand_per_user</code></td>
+<td>Bandwidth demand per individual user in Mbps</td>
+</tr>
+<tr>
+<td></td>
+<td><code>number_of_users</code></td>
+<td>Estimated number of internet users at this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>poi_count_10km</code></td>
+<td>Number of other POIs within 10km radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>poi_count_1km</code></td>
+<td>Number of other POIs within 1km radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>poi_count_2km</code></td>
+<td>Number of other POIs within 2km radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>poi_count_3km</code></td>
+<td>Number of other POIs within 3km radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>poi_count_4km</code></td>
+<td>Number of other POIs within 4km radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>poi_count_5km</code></td>
+<td>Number of other POIs within 5km radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pop_within_10km</code></td>
+<td>Population count within 10km buffer around POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pop_within_1km</code></td>
+<td>Population count within 1km buffer around POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pop_within_3km</code></td>
+<td>Population count within 3km buffer around POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pop_within_4km</code></td>
+<td>Population count within 4km buffer around POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pop_within_5km</code></td>
+<td>Population count within 5km buffer around POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>total_mbps</code></td>
+<td>Total bandwidth demand in Mbps for this POI</td>
+</tr>
+<tr>
+<td><strong>Fiber Path</strong></td>
+<td><code>closest_node_distance</code></td>
+<td>Distance in meters to the closest fiber node</td>
+</tr>
+<tr>
+<td></td>
+<td><code>closest_node_id</code></td>
+<td>Identifier of the nearest fiber node</td>
+</tr>
+<tr>
+<td></td>
+<td><code>connected_node_dist</code></td>
+<td>Distance in meters to the connected fiber node</td>
+</tr>
+<tr>
+<td></td>
+<td><code>connected_node_id</code></td>
+<td>Identifier of the node this POI is connected to</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fiber_path</code></td>
+<td>Route description for fiber optic connection to this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fiber_path_incl_poi</code></td>
+<td>Fiber connection path including this POI in the route</td>
+</tr>
+<tr>
+<td></td>
+<td><code>fiber_path_order</code></td>
+<td>Order/sequence number of this POI in the fiber deployment path</td>
+</tr>
+<tr>
+<td></td>
+<td><code>in_mst_solution</code></td>
+<td>Boolean indicating if POI is included in fiber path solution</td>
+</tr>
+<tr>
+<td></td>
+<td><code>max_dist_km</code></td>
+<td>Maximum allowable distance in km for fiber path solution</td>
+</tr>
+<tr>
+<td></td>
+<td><code>n_conns</code></td>
+<td>Number of network connections associated with this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>upstream_node_distance</code></td>
+<td>Distance in meters to the upstream fiber node</td>
+</tr>
+<tr>
+<td></td>
+<td><code>upstream_node_id</code></td>
+<td>Identifier of the upstream network node in the connection path</td>
+</tr>
+<tr>
+<td><strong>Visibility</strong></td>
+<td><code>antenna_los_distance</code></td>
+<td>Line-of-sight distance in meters for antenna/radio connections</td>
+</tr>
+<tr>
+<td></td>
+<td><code>azimuth_angle</code></td>
+<td>Directional angle in degrees for point-to-point radio links</td>
+</tr>
+<tr>
+<td></td>
+<td><code>is_visible</code></td>
+<td>Boolean indicating if POI has line-of-sight to cellular infrastructure</td>
+</tr>
+<tr>
+<td></td>
+<td><code>is_visible_pois</code></td>
+<td>Boolean indicating if this POI is visible to other POIs</td>
+</tr>
+<tr>
+<td></td>
+<td><code>num_visible</code></td>
+<td>Count of visible cellular sites from this POI location</td>
+</tr>
+<tr>
+<td></td>
+<td><code>vis_geometry</code></td>
+<td>Geometric representation of visibility analysis</td>
+</tr>
+<tr>
+<td></td>
+<td><code>visible_cell_site_dist</code></td>
+<td>Distance in meters to the nearest visible cellular site</td>
+</tr>
+<tr>
+<td></td>
+<td><code>visible_cell_site_ict_id</code></td>
+<td>ID of the nearest visible cellular tower/base station</td>
+</tr>
+<tr>
+<td></td>
+<td><code>visible_cell_site_radio_type</code></td>
+<td>Type of radio technology at the nearest visible cell site</td>
+</tr>
+<tr>
+<td></td>
+<td><code>visible_pois</code></td>
+<td>List of other POIs visible from this location</td>
+</tr>
+<tr>
+<td><strong>Technology Assignment</strong></td>
+<td><code>fiber_feasible</code></td>
+<td>Whether fiber is feasible for this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>number_of_periods</code></td>
+<td>Total number of time periods for the connection</td>
+</tr>
+<tr>
+<td></td>
+<td><code>p2area_feasible</code></td>
+<td>Whether p2area is feasible for this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>p2p_feasible</code></td>
+<td>Whether p2p is feasible for this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>satellite_feasible</code></td>
+<td>Whether satellite is feasible for this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>technology</code></td>
+<td>Selected connectivity technology solution for this POI</td>
+</tr>
+<tr>
+<td><strong>Cost</strong></td>
+<td><code>annual_cost</code></td>
+<td>Annual cost of ownership (CAPEX and OPEX)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>annual_revenue</code></td>
+<td>Annual operator revenue from ISP retail fees</td>
+</tr>
+<tr>
+<td></td>
+<td><code>init_capex</code></td>
+<td>Initial capital expenditure</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pp_coo</code></td>
+<td>Total cost of ownership (CAPEX and OPEX) over project period</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pp_profit</code></td>
+<td>Operator profits over project period (ISP retail fees minus cost of ownership)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pp_revenue</code></td>
+<td>Operator revenue over project period (ISP retail fees)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="cell-sites">Cell sites</h2>
+<h1 id="fiber-path-edge-level-results">Fiber Path Edge-level results</h1>
+<p><img alt="Fiber path edges visualization" src="../img/results-fiber-lines.png" /></p>
+<h2 id="output-file-metadata_1">Output File Metadata</h2>
 <table>
 <thead>
 <tr>
-<th>Column name</th>
-<th>Column type</th>
-<th>Levels</th>
-<th>Example</th>
-<th>Mandatory</th>
-<th>Definition</th>
+<th>Analysis Source</th>
+<th>Indicator</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>ict_id</td>
-<td>UUID</td>
+<td><strong>Fiber Path</strong></td>
+<td><code>index</code></td>
+<td>Sequential row identifier for each road network edge/segment</td>
+</tr>
+<tr>
 <td></td>
-<td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>Yes</td>
-<td>Cell tower identifier</td>
+<td><code>u</code></td>
+<td>Source node identifier (starting point of road segment)</td>
 </tr>
 <tr>
-<td>dataset_id</td>
-<td>UUID</td>
 <td></td>
-<td>987fcdeb-51a2-12d3-a456-426614174000</td>
-<td>Yes</td>
-<td>Unique identifier for the dataset</td>
+<td><code>v</code></td>
+<td>Target node identifier (ending point of road segment)</td>
 </tr>
 <tr>
-<td>latitude</td>
-<td>float</td>
 <td></td>
-<td>38.988755</td>
-<td>Yes</td>
-<td>Cell tower geographical latitude</td>
+<td><code>key</code></td>
+<td>Unique key identifier for parallel edges between same nodes</td>
 </tr>
 <tr>
-<td>longitude</td>
-<td>float</td>
 <td></td>
-<td>1.401938</td>
-<td>Yes</td>
-<td>Cell tower geographical longitude</td>
+<td><code>osmid</code></td>
+<td>OpenStreetMap identifier for the original road segment</td>
 </tr>
 <tr>
-<td>radio_type</td>
-<td>string</td>
-<td>2G, 3G, 4G, 5G</td>
-<td>4G</td>
-<td>Yes</td>
-<td>Type of radio transmission technology</td>
-</tr>
-<tr>
-<td>antenna_height</td>
-<td>float</td>
 <td></td>
-<td>25</td>
-<td>Yes</td>
-<td>Antenna height in meters from the ground</td>
+<td><code>geometry</code></td>
+<td>Geometric representation of the road segment (linestring coordinates)</td>
 </tr>
 <tr>
-<td>operator_name</td>
-<td>string</td>
 <td></td>
-<td>TelOperator</td>
-<td>No</td>
-<td>Mobile network operator name</td>
-</tr>
-<tr>
-<td>backhaul_type</td>
-<td>string</td>
-<td>fiber, microwave, satellite</td>
-<td>fiber</td>
-<td>No</td>
-<td>Type of backhaul connectivity of the cell tower</td>
-</tr>
-<tr>
-<td>backhaul_throughput_mbps</td>
-<td>float</td>
-<td></td>
-<td>1000</td>
-<td>No</td>
-<td>Equipped throughput of the backhaul</td>
+<td><code>cluster</code></td>
+<td>Geographical cluster identifier for regional analysis grouping</td>
 </tr>
 </tbody>
 </table>
-<h2 id="transmission-nodes">Transmission nodes</h2>
+<h1 id="visibility-edge-level-results">Visibility Edge-level results</h1>
+<p><img alt="Radio links visualization" src="../img/results-radio-links.png" /></p>
+<h2 id="output-file-metadata_2">Output File Metadata</h2>
 <table>
 <thead>
 <tr>
-<th>Column name</th>
-<th>Column type</th>
-<th>Levels</th>
-<th>Example</th>
-<th>Mandatory</th>
-<th>Definition</th>
+<th>Analysis Source</th>
+<th>Indicator</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>ict_id</td>
-<td>UUID</td>
+<td><strong>Visibility</strong></td>
+<td><code>poi_id</code></td>
+<td>Unique identifier for the Point of Interest being analyzed</td>
+</tr>
+<tr>
 <td></td>
-<td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>Yes</td>
-<td>Node identifier</td>
+<td><code>ict_id</code></td>
+<td>Identifier for the cell site</td>
 </tr>
 <tr>
-<td>dataset_id</td>
-<td>UUID</td>
 <td></td>
-<td>987fcdeb-51a2-12d3-a456-426614174000</td>
-<td>Yes</td>
-<td>Unique identifier for the dataset</td>
+<td><code>radio_type</code></td>
+<td>Type of radio technology at the ICT node (e.g. 4G, 5G)</td>
 </tr>
 <tr>
-<td>latitude</td>
-<td>float</td>
 <td></td>
-<td>38.988755</td>
-<td>Yes</td>
-<td>Geographical latitude</td>
+<td><code>ground_distance</code></td>
+<td>Straight-line distance on ground between POI and cell site (2D)</td>
 </tr>
 <tr>
-<td>longitude</td>
-<td>float</td>
 <td></td>
-<td>1.401938</td>
-<td>Yes</td>
-<td>Geographical longitude</td>
+<td><code>antenna_los_distance</code></td>
+<td>Straight-line distance between two antennas in meters (3D)</td>
 </tr>
 <tr>
-<td>transmission_medium</td>
-<td>string</td>
-<td>fiber, microwave, other</td>
-<td>fiber</td>
-<td>Yes</td>
-<td>Transmission medium</td>
-</tr>
-<tr>
-<td>node_status</td>
-<td>string</td>
-<td>operational, planned, under construction</td>
-<td>operational</td>
-<td>Yes</td>
-<td>Status of the node</td>
-</tr>
-<tr>
-<td>operator_name</td>
-<td>string</td>
 <td></td>
-<td>TelOperator</td>
-<td>No</td>
-<td>Name of the mobile operator</td>
+<td><code>azimuth_angle</code></td>
+<td>Directional bearing angle in degrees from POI to cell site infrastructure</td>
 </tr>
 <tr>
-<td>equipped_capacity_mbps</td>
-<td>float</td>
 <td></td>
-<td>1000</td>
-<td>No</td>
-<td>Equipped bandwidth ready for use to connect subscribers</td>
+<td><code>geometry</code></td>
+<td>Geometric representation of the line-of-sight path between locations</td>
 </tr>
 <tr>
-<td>potential_capacity_mbps</td>
-<td>float</td>
 <td></td>
-<td>2000</td>
-<td>No</td>
-<td>Total theoretical bandwidth available for subscriber connections</td>
+<td><code>is_visible</code></td>
+<td>Boolean indicating if clear line-of-sight exists for POI with at least one cell site</td>
 </tr>
-</tbody>
-</table>
-<h2 id="mobile-coverage">Mobile coverage</h2>
-<table>
-<thead>
 <tr>
-<th>Column name</th>
-<th>Column type</th>
-<th>Levels</th>
-<th>Example</th>
-<th>Mandatory</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>geometry</td>
-<td>geometry</td>
 <td></td>
-<td>POLYGON((-74.0060 40.7128, -73.9857 40.7484, -73.9772 40.7516, -74.0060 40.7128))</td>
-<td>Yes</td>
-<td>Mobile coverage polygons</td>
+<td><code>num_visible</code></td>
+<td>Total count of cell sites visible from this POI location</td>
 </tr>
 <tr>
-<td>radio_type</td>
-<td>str</td>
-<td>2G, 3G, 4G, 5G</td>
-<td>4G</td>
-<td>Yes</td>
-<td>Radio technology type</td>
-</tr>
-<tr>
-<td>fid</td>
-<td>str</td>
 <td></td>
-<td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>No</td>
-<td>Unique identifier for polygons</td>
+<td><code>order</code></td>
+<td>Ranking order of this cell site by proximity from POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>visible_pois</code></td>
+<td>Array of other POI identifiers that are visible from this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>is_visible_pois</code></td>
+<td>List of other POIs that are visible from this POI</td>
 </tr>
 </tbody>
 </table>
