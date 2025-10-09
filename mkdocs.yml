@@ -10,6 +10,7 @@ nav:
   - Visibility: visibility.md
   - Cost: costmodel.md
   - Technology Assignment: assignment.md
+  - Results Metadata: results.md
 theme: material
 markdown_extensions:
   - pymdownx.arithmatex:
