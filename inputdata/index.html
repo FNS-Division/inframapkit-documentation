@@ -605,16 +605,16 @@
 <td>UUID</td>
 <td></td>
 <td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>Yes</td>
-<td>Unique identifier for the POI</td>
+<td>No</td>
+<td>Unique identifier for the POI, automatically generated</td>
 </tr>
 <tr>
 <td>dataset_id</td>
 <td>UUID</td>
 <td></td>
 <td>987fcdeb-51a2-12d3-a456-426614174000</td>
-<td>Yes</td>
-<td>Unique identifier for the dataset</td>
+<td>No</td>
+<td>Unique identifier for the dataset, automatically generated</td>
 </tr>
 <tr>
 <td>lat</td>
@@ -637,7 +637,7 @@
 <td>string</td>
 <td></td>
 <td>DZA</td>
-<td>Yes</td>
+<td>No</td>
 <td>ISO 3166-1 alpha-3 country code</td>
 </tr>
 <tr>
@@ -645,24 +645,24 @@
 <td>boolean</td>
 <td></td>
 <td>True</td>
-<td>Yes</td>
-<td>Whether the POI has connectivity</td>
+<td>No</td>
+<td>Whether the POI has connectivity. If this column is missing, the connectivits status will be inferred using <a href="https://www.ookla.com/ookla-for-good/open-data">Ookla Speedtest</a> measurements.</td>
 </tr>
 <tr>
 <td>connectivity_type</td>
 <td>string</td>
 <td>unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired</td>
 <td>fiber</td>
-<td>Yes</td>
-<td>Type of internet connectivity</td>
+<td>No</td>
+<td>Type of internet connectivity. If this column is missing, the connectivits status will be inferred using <a href="https://www.ookla.com/ookla-for-good/open-data">Ookla Speedtest</a> measurements.</td>
 </tr>
 <tr>
 <td>has_electricity</td>
 <td>boolean</td>
 <td></td>
 <td>True</td>
-<td>Yes</td>
-<td>Whether the POI has electricity</td>
+<td>No</td>
+<td>Whether the POI has electricity. If missing, no electricity will be assumed.</td>
 </tr>
 <tr>
 <td>number_of_users</td>
@@ -670,7 +670,7 @@
 <td></td>
 <td>True</td>
 <td>No</td>
-<td>Peak number of internet user at the POI</td>
+<td>Peak number of internet user at the POI. If missing, this will be estimated by the demand model using population data.</td>
 </tr>
 <tr>
 <td>poi_type</td>
@@ -679,22 +679,6 @@
 <td>school</td>
 <td>No</td>
 <td>Type of point of interest</td>
-</tr>
-<tr>
-<td>is_public</td>
-<td>boolean</td>
-<td></td>
-<td>True</td>
-<td>No</td>
-<td>Whether the POI is public or private</td>
-</tr>
-<tr>
-<td>poi_subtype</td>
-<td>string</td>
-<td></td>
-<td>primary school</td>
-<td>No</td>
-<td>Specific subtype of the POI</td>
 </tr>
 </tbody>
 </table>
@@ -716,7 +700,7 @@
 <td>UUID</td>
 <td></td>
 <td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>Yes</td>
+<td>No</td>
 <td>Cell tower identifier</td>
 </tr>
 <tr>
@@ -724,7 +708,7 @@
 <td>UUID</td>
 <td></td>
 <td>987fcdeb-51a2-12d3-a456-426614174000</td>
-<td>Yes</td>
+<td>No</td>
 <td>Unique identifier for the dataset</td>
 </tr>
 <tr>
@@ -756,8 +740,8 @@
 <td>float</td>
 <td></td>
 <td>25</td>
-<td>Yes</td>
-<td>Antenna height in meters from the ground</td>
+<td>No</td>
+<td>Antenna height in meters from the ground, if missing a height of 25 meters will be assumed.</td>
 </tr>
 <tr>
 <td>operator_name</td>
@@ -803,7 +787,7 @@
 <td>UUID</td>
 <td></td>
 <td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>Yes</td>
+<td>No</td>
 <td>Node identifier</td>
 </tr>
 <tr>
@@ -811,7 +795,7 @@
 <td>UUID</td>
 <td></td>
 <td>987fcdeb-51a2-12d3-a456-426614174000</td>
-<td>Yes</td>
+<td>No</td>
 <td>Unique identifier for the dataset</td>
 </tr>
 <tr>
@@ -835,16 +819,16 @@
 <td>string</td>
 <td>fiber, microwave, other</td>
 <td>fiber</td>
-<td>Yes</td>
-<td>Transmission medium</td>
+<td>No</td>
+<td>Transmission medium. If missing, 'fiber' will be assumed.</td>
 </tr>
 <tr>
 <td>node_status</td>
 <td>string</td>
 <td>operational, planned, under construction</td>
 <td>operational</td>
-<td>Yes</td>
-<td>Status of the node</td>
+<td>No</td>
+<td>Status of the node. If missing, 'operational' will be assumed.</td>
 </tr>
 <tr>
 <td>operator_name</td>
