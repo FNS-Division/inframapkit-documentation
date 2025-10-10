@@ -23,8 +23,8 @@ This page summarizes the data user-provided required by the toolkit. The provide
 |------------|-------------|---------|----------|-----------|------------|
 | ict_id | UUID | | 123e4567-e89b-12d3-a456-426614174000 | No | Cell tower identifier |
 | dataset_id | UUID | | 987fcdeb-51a2-12d3-a456-426614174000 | No | Unique identifier for the dataset |
-| latitude | float | | 38.988755 | Yes | Cell tower geographical latitude |
-| longitude | float | | 1.401938 | Yes | Cell tower geographical longitude |
+| lat | float | | 38.988755 | Yes | Cell tower geographical latitude |
+| lon | float | | 1.401938 | Yes | Cell tower geographical longitude |
 | radio_type | string | 2G, 3G, 4G, 5G | 4G | Yes | Type of radio transmission technology |
 | antenna_height | float | | 25 | No | Antenna height in meters from the ground, if missing a height of 25 meters will be assumed. |
 | operator_name | string | | TelOperator | No | Mobile network operator name |
@@ -37,8 +37,8 @@ This page summarizes the data user-provided required by the toolkit. The provide
 |------------|-------------|---------|----------|-----------|------------|
 | ict_id | UUID | | 123e4567-e89b-12d3-a456-426614174000 | No | Node identifier |
 | dataset_id | UUID | | 987fcdeb-51a2-12d3-a456-426614174000 | No | Unique identifier for the dataset |
-| latitude | float | | 38.988755 | Yes | Geographical latitude |
-| longitude | float | | 1.401938 | Yes | Geographical longitude |
+| lat | float | | 38.988755 | Yes | Geographical latitude |
+| lon | float | | 1.401938 | Yes | Geographical longitude |
 | transmission_medium | string | fiber, microwave, other | fiber | No | Transmission medium. If missing, 'fiber' will be assumed. |
 | node_status | string | operational, planned, under construction | operational | No | Status of the node. If missing, 'operational' will be assumed. |
 | operator_name | string | | TelOperator | No | Name of the mobile operator |
