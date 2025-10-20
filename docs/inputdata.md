@@ -11,8 +11,8 @@ This page summarizes the data user-provided required by the toolkit. The provide
 | lat | float | | 36.7538 | Yes | Latitude coordinate |
 | lon | float | | 3.0588 | Yes | Longitude coordinate |
 | country_code | string | | DZA | No | ISO 3166-1 alpha-3 country code |
-| is_connected | boolean | | True | No | Whether the POI has connectivity. If this column is missing, the connectivits status will be inferred using [Ookla Speedtest](https://www.ookla.com/ookla-for-good/open-data) measurements. |
-| connectivity_type | string | unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired | fiber | No | Type of internet connectivity. If this column is missing, the connectivits status will be inferred using [Ookla Speedtest](https://www.ookla.com/ookla-for-good/open-data) measurements. |
+| is_connected | boolean | | True | No | Whether the POI has connectivity. If this column is missing, the connectivits status will be inferred using [speed test](https://www.ookla.com/ookla-for-good/open-data) measurements. |
+| connectivity_type | string | unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired | fiber | No | Type of internet connectivity. If this column is missing, the connectivits status will be inferred using [speed test](https://www.ookla.com/ookla-for-good/open-data) measurements. |
 | has_electricity | boolean | | True | No | Whether the POI has electricity. If missing, no electricity will be assumed. |
 | number_of_users | boolean | | True | No | Peak number of internet user at the POI. If missing, this will be estimated by the demand model using population data. |
 | poi_type | string | | school | No | Type of point of interest |
