@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2a3383ac.min.css">
       
       
 
@@ -936,38 +936,8 @@
 </tr>
 <tr>
 <td></td>
-<td><code>ict_id</code></td>
-<td>Identifier for the cell site</td>
-</tr>
-<tr>
-<td></td>
-<td><code>radio_type</code></td>
-<td>Type of radio technology at the ICT node (e.g. 4G, 5G)</td>
-</tr>
-<tr>
-<td></td>
-<td><code>ground_distance</code></td>
-<td>Straight-line distance on ground between POI and cell site (2D)</td>
-</tr>
-<tr>
-<td></td>
-<td><code>antenna_los_distance</code></td>
-<td>Straight-line distance between two antennas in meters (3D)</td>
-</tr>
-<tr>
-<td></td>
-<td><code>azimuth_angle</code></td>
-<td>Directional bearing angle in degrees from POI to cell site infrastructure</td>
-</tr>
-<tr>
-<td></td>
-<td><code>geometry</code></td>
-<td>Geometric representation of the line-of-sight path between locations</td>
-</tr>
-<tr>
-<td></td>
 <td><code>is_visible</code></td>
-<td>Boolean indicating if clear line-of-sight exists for POI with at least one cell site</td>
+<td>Boolean indicating if clear line-of-sight exists between POI and at least one cell site</td>
 </tr>
 <tr>
 <td></td>
@@ -976,18 +946,43 @@
 </tr>
 <tr>
 <td></td>
-<td><code>order</code></td>
-<td>Ranking order of this cell site by proximity from POI</td>
+<td><code>visible_cell_site_ict_id</code></td>
+<td>Identifier of the visible cell site</td>
 </tr>
 <tr>
 <td></td>
-<td><code>visible_pois</code></td>
-<td>Array of other POI identifiers that are visible from this POI</td>
+<td><code>visible_cell_site_radio_type</code></td>
+<td>Type of radio technology at the visible cell site (e.g., 4G, 5G)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>visible_cell_site_dist</code></td>
+<td>Straight-line ground distance between POI and visible cell site in meters (2D)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>antenna_los_distance</code></td>
+<td>Straight-line distance between POI and cell site antenna in meters (3D)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>azimuth_angle</code></td>
+<td>Directional bearing angle in degrees from POI to cell site</td>
 </tr>
 <tr>
 <td></td>
 <td><code>is_visible_pois</code></td>
-<td>List of other POIs that are visible from this POI</td>
+<td>Boolean indicating if other POIs are visible from this POI</td>
+</tr>
+<tr>
+<td></td>
+<td><code>visible_pois</code></td>
+<td>Array of POI identifiers that are visible from this POI location</td>
+</tr>
+<tr>
+<td></td>
+<td><code>geometry</code></td>
+<td>LineString geometry representing the line-of-sight path between POI and cell site</td>
 </tr>
 </tbody>
 </table>
