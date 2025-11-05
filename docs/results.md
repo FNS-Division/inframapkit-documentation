@@ -97,14 +97,13 @@
 | Analysis Source | Indicator | Description |
 |----------------|-----------|-------------|
 | **Visibility** | `poi_id` | Unique identifier for the Point of Interest being analyzed |
-| | `ict_id` | Identifier for the cell site |
-| | `radio_type` | Type of radio technology at the ICT node (e.g. 4G, 5G) |
-| | `ground_distance` | Straight-line distance on ground between POI and cell site (2D) |
-| | `antenna_los_distance` | Straight-line distance between two antennas in meters (3D) |
-| | `azimuth_angle` | Directional bearing angle in degrees from POI to cell site infrastructure |
-| | `geometry` | Geometric representation of the line-of-sight path between locations |
-| | `is_visible` | Boolean indicating if clear line-of-sight exists for POI with at least one cell site |
+| | `is_visible` | Boolean indicating if clear line-of-sight exists between POI and at least one cell site |
 | | `num_visible` | Total count of cell sites visible from this POI location |
-| | `order` | Ranking order of this cell site by proximity from POI |
-| | `visible_pois` | Array of other POI identifiers that are visible from this POI |
-| | `is_visible_pois` | List of other POIs that are visible from this POI |
+| | `visible_cell_site_ict_id` | Identifier of the visible cell site |
+| | `visible_cell_site_radio_type` | Type of radio technology at the visible cell site (e.g., 4G, 5G) |
+| | `visible_cell_site_dist` | Straight-line ground distance between POI and visible cell site in meters (2D) |
+| | `antenna_los_distance` | Straight-line distance between POI and cell site antenna in meters (3D) |
+| | `azimuth_angle` | Directional bearing angle in degrees from POI to cell site |
+| | `is_visible_pois` | Boolean indicating if other POIs are visible from this POI |
+| | `visible_pois` | Array of POI identifiers that are visible from this POI location |
+| | `geometry` | LineString geometry representing the line-of-sight path between POI and cell site |
