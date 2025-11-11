@@ -78,7 +78,7 @@ n addition to the columns below, any columns present in the original Point of In
 
 # Fibre Path Edge-level results
 
-![Fibre path edges visualisation](img/results-fibre-lines.png)
+![Fibre path edges visualisation](img/results-fiber-lines.png)
 
 ## Output File Metadata
 
