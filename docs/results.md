@@ -75,6 +75,8 @@ n addition to the columns below, any columns present in the original Point of In
 | | `pp_coo` | Total cost of ownership (CAPEX and OPEX) over project period |
 | | `pp_profit` | Operator profits over project period (ISP retail fees minus cost of ownership) |
 | | `pp_revenue` | Operator revenue over project period (ISP retail fees) |
+| | `pv_costs` | Present Value of the total cost of ownership (CAPEX and OPEX) over project period  |
+| | `pv_revenues` | Present Value of the ISP retail fees over project period  |
 
 # Fibre Path Edge-level results
 
