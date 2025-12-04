@@ -665,7 +665,7 @@
 
 
 <h1 id="datasets">Datasets</h1>
-<p>This page summarizes the data user-provided required by the toolkit. The provided data must conform to the standards below.</p>
+<p>This page summarises the user-provided data required by the toolkit. The provided data must conform to the standards below.</p>
 <h2 id="points-of-interest-poi">Points of interest (POI)</h2>
 <table>
 <thead>
@@ -680,28 +680,12 @@
 </thead>
 <tbody>
 <tr>
-<td>poi_id</td>
-<td>UUID</td>
-<td></td>
-<td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>No</td>
-<td>Unique identifier for the POI, automatically generated</td>
-</tr>
-<tr>
-<td>dataset_id</td>
-<td>UUID</td>
-<td></td>
-<td>987fcdeb-51a2-12d3-a456-426614174000</td>
-<td>No</td>
-<td>Unique identifier for the dataset, automatically generated</td>
-</tr>
-<tr>
 <td>lat</td>
 <td>float</td>
 <td></td>
 <td>36.7538</td>
 <td>Yes</td>
-<td>Latitude coordinate</td>
+<td>Latitude coordinate in geographic Coordinate Reference System WGS84</td>
 </tr>
 <tr>
 <td>lon</td>
@@ -709,7 +693,15 @@
 <td></td>
 <td>3.0588</td>
 <td>Yes</td>
-<td>Longitude coordinate</td>
+<td>Longitude coordinate in geographic Coordinate Reference System WGS84</td>
+</tr>
+<tr>
+<td>connectivity_type</td>
+<td>string</td>
+<td>unknown, mobile, mobile_broadband, metro, fibre, wireless, satellite, wired</td>
+<td>fibre</td>
+<td>No</td>
+<td>Type of internet connectivity. If this column is missing, the connectivity status will be inferred using <a href="https://www.ookla.com/ookla-for-good/open-data">speed test</a> measurements.</td>
 </tr>
 <tr>
 <td>country_code</td>
@@ -720,20 +712,12 @@
 <td>ISO 3166-1 alpha-3 country code</td>
 </tr>
 <tr>
-<td>is_connected</td>
-<td>boolean</td>
+<td>dataset_id</td>
+<td>UUID</td>
 <td></td>
-<td>True</td>
+<td>987fcdeb-51a2-12d3-a456-426614174000</td>
 <td>No</td>
-<td>Whether the POI has connectivity. If this column is missing, the connectivits status will be inferred using <a href="https://www.ookla.com/ookla-for-good/open-data">speed test</a> measurements.</td>
-</tr>
-<tr>
-<td>connectivity_type</td>
-<td>string</td>
-<td>unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired</td>
-<td>fiber</td>
-<td>No</td>
-<td>Type of internet connectivity. If this column is missing, the connectivits status will be inferred using <a href="https://www.ookla.com/ookla-for-good/open-data">speed test</a> measurements.</td>
+<td>Unique identifier for the dataset, automatically generated</td>
 </tr>
 <tr>
 <td>has_electricity</td>
@@ -744,12 +728,28 @@
 <td>Whether the POI has electricity. If missing, no electricity will be assumed.</td>
 </tr>
 <tr>
+<td>is_connected</td>
+<td>boolean</td>
+<td></td>
+<td>True</td>
+<td>No</td>
+<td>Whether the POI has connectivity. If this column is missing, the connectivity status will be inferred using <a href="https://www.ookla.com/ookla-for-good/open-data">speed test</a> measurements.</td>
+</tr>
+<tr>
 <td>number_of_users</td>
 <td>boolean</td>
 <td></td>
 <td>True</td>
 <td>No</td>
 <td>Peak number of internet user at the POI. If missing, this will be estimated by the demand model using population data.</td>
+</tr>
+<tr>
+<td>poi_id</td>
+<td>UUID</td>
+<td></td>
+<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>No</td>
+<td>Unique identifier for the POI, automatically generated</td>
 </tr>
 <tr>
 <td>poi_type</td>
@@ -775,28 +775,12 @@
 </thead>
 <tbody>
 <tr>
-<td>ict_id</td>
-<td>UUID</td>
-<td></td>
-<td>123e4567-e89b-12d3-a456-426614174000</td>
-<td>No</td>
-<td>Cell tower identifier</td>
-</tr>
-<tr>
-<td>dataset_id</td>
-<td>UUID</td>
-<td></td>
-<td>987fcdeb-51a2-12d3-a456-426614174000</td>
-<td>No</td>
-<td>Unique identifier for the dataset</td>
-</tr>
-<tr>
 <td>lat</td>
 <td>float</td>
 <td></td>
 <td>38.988755</td>
 <td>Yes</td>
-<td>Cell tower geographical latitude</td>
+<td>Latitude coordinate in geographic Coordinate Reference System WGS84</td>
 </tr>
 <tr>
 <td>lon</td>
@@ -804,7 +788,7 @@
 <td></td>
 <td>1.401938</td>
 <td>Yes</td>
-<td>Cell tower geographical longitude</td>
+<td>Longitude coordinate in geographic Coordinate Reference System WGS84</td>
 </tr>
 <tr>
 <td>radio_type</td>
@@ -823,28 +807,28 @@
 <td>Antenna height in meters from the ground, if missing a height of 25 meters will be assumed.</td>
 </tr>
 <tr>
-<td>operator_name</td>
+<td>country_code</td>
 <td>string</td>
 <td></td>
-<td>TelOperator</td>
+<td>DZA</td>
 <td>No</td>
-<td>Mobile network operator name</td>
+<td>ISO 3166-1 alpha-3 country code</td>
 </tr>
 <tr>
-<td>backhaul_type</td>
-<td>string</td>
-<td>fiber, microwave, satellite</td>
-<td>fiber</td>
-<td>No</td>
-<td>Type of backhaul connectivity of the cell tower</td>
-</tr>
-<tr>
-<td>backhaul_throughput_mbps</td>
-<td>float</td>
+<td>dataset_id</td>
+<td>UUID</td>
 <td></td>
-<td>1000</td>
+<td>987fcdeb-51a2-12d3-a456-426614174000</td>
 <td>No</td>
-<td>Equipped throughput of the backhaul</td>
+<td>Unique identifier for the dataset</td>
+</tr>
+<tr>
+<td>ict_id</td>
+<td>UUID</td>
+<td></td>
+<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>No</td>
+<td>Cell tower identifier</td>
 </tr>
 </tbody>
 </table>
@@ -862,12 +846,28 @@
 </thead>
 <tbody>
 <tr>
-<td>ict_id</td>
-<td>UUID</td>
+<td>lat</td>
+<td>float</td>
 <td></td>
-<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>38.988755</td>
+<td>Yes</td>
+<td>Latitude coordinate in geographic Coordinate Reference System WGS84</td>
+</tr>
+<tr>
+<td>lon</td>
+<td>float</td>
+<td></td>
+<td>1.401938</td>
+<td>Yes</td>
+<td>Longitude coordinate in geographic Coordinate Reference System WGS84</td>
+</tr>
+<tr>
+<td>country_code</td>
+<td>string</td>
+<td></td>
+<td>DZA</td>
 <td>No</td>
-<td>Node identifier</td>
+<td>ISO 3166-1 alpha-3 country code</td>
 </tr>
 <tr>
 <td>dataset_id</td>
@@ -878,60 +878,20 @@
 <td>Unique identifier for the dataset</td>
 </tr>
 <tr>
-<td>lat</td>
-<td>float</td>
+<td>ict_id</td>
+<td>UUID</td>
 <td></td>
-<td>38.988755</td>
-<td>Yes</td>
-<td>Geographical latitude</td>
-</tr>
-<tr>
-<td>lon</td>
-<td>float</td>
-<td></td>
-<td>1.401938</td>
-<td>Yes</td>
-<td>Geographical longitude</td>
+<td>123e4567-e89b-12d3-a456-426614174000</td>
+<td>No</td>
+<td>Node identifier</td>
 </tr>
 <tr>
 <td>transmission_medium</td>
 <td>string</td>
-<td>fiber, microwave, other</td>
-<td>fiber</td>
+<td>fibre, microwave, other</td>
+<td>fibre</td>
 <td>No</td>
-<td>Transmission medium. If missing, 'fiber' will be assumed.</td>
-</tr>
-<tr>
-<td>node_status</td>
-<td>string</td>
-<td>operational, planned, under construction</td>
-<td>operational</td>
-<td>No</td>
-<td>Status of the node. If missing, 'operational' will be assumed.</td>
-</tr>
-<tr>
-<td>operator_name</td>
-<td>string</td>
-<td></td>
-<td>TelOperator</td>
-<td>No</td>
-<td>Name of the mobile operator</td>
-</tr>
-<tr>
-<td>equipped_capacity_mbps</td>
-<td>float</td>
-<td></td>
-<td>1000</td>
-<td>No</td>
-<td>Equipped bandwidth ready for use to connect subscribers</td>
-</tr>
-<tr>
-<td>potential_capacity_mbps</td>
-<td>float</td>
-<td></td>
-<td>2000</td>
-<td>No</td>
-<td>Total theoretical bandwidth available for subscriber connections</td>
+<td>Transmission medium. If missing, 'fibre' will be assumed.</td>
 </tr>
 </tbody>
 </table>
@@ -954,7 +914,7 @@
 <td></td>
 <td>POLYGON((-74.0060 40.7128, -73.9857 40.7484, -73.9772 40.7516, -74.0060 40.7128))</td>
 <td>Yes</td>
-<td>Mobile coverage polygons</td>
+<td>Mobile coverage polygons in geographic Coordinate Reference System WGS84</td>
 </tr>
 <tr>
 <td>radio_type</td>
@@ -963,6 +923,22 @@
 <td>4G</td>
 <td>Yes</td>
 <td>Radio technology type</td>
+</tr>
+<tr>
+<td>country_code</td>
+<td>string</td>
+<td></td>
+<td>DZA</td>
+<td>No</td>
+<td>ISO 3166-1 alpha-3 country code</td>
+</tr>
+<tr>
+<td>dataset_id</td>
+<td>UUID</td>
+<td></td>
+<td>987fcdeb-51a2-12d3-a456-426614174000</td>
+<td>No</td>
+<td>Unique identifier for the dataset</td>
 </tr>
 <tr>
 <td>fid</td>
