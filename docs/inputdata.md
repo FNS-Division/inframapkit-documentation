@@ -8,7 +8,7 @@ This page summarises the user-provided data required by the toolkit. The provide
 |------------|-------------|---------|----------|-----------|------------|
 | lat | float | | 36.7538 | Yes | Latitude coordinate in geographic Coordinate Reference System WGS84 |
 | lon | float | | 3.0588 | Yes | Longitude coordinate in geographic Coordinate Reference System WGS84 |
-| connectivity_type | string | unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired | fibre | No | Type of internet connectivity. If this column is missing, the connectivity status will be inferred using [speed test](https://www.ookla.com/ookla-for-good/open-data) measurements. |
+| connectivity_type | string | unknown, mobile, mobile_broadband, metro, fiber, wireless, satellite, wired | fiber | No | Type of internet connectivity. If this column is missing, the connectivity status will be inferred using [speed test](https://www.ookla.com/ookla-for-good/open-data) measurements. |
 | country_code | string | | DZA | No | ISO 3166-1 alpha-3 country code |
 | dataset_id | UUID | | 987fcdeb-51a2-12d3-a456-426614174000 | No | Unique identifier for the dataset, automatically generated |
 | has_electricity | boolean | | True | No | Whether the POI has electricity. If missing, no electricity will be assumed. |
@@ -38,7 +38,7 @@ This page summarises the user-provided data required by the toolkit. The provide
 | country_code | string | | DZA | No | ISO 3166-1 alpha-3 country code |
 | dataset_id | UUID | | 987fcdeb-51a2-12d3-a456-426614174000 | No | Unique identifier for the dataset |
 | ict_id | UUID | | 123e4567-e89b-12d3-a456-426614174000 | No | Node identifier |
-| transmission_medium | string | fibre, microwave, other | fibre | No | Transmission medium. If missing, 'fibre' will be assumed. |
+| transmission_medium | string | fiber, microwave, other | fiber | No | Transmission medium. If missing, 'fiber' will be assumed. |
 
 ## Mobile coverage
 
